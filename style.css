@@ -1,0 +1,71 @@
+:root{
+  --bg1:#1b1033; --bg2:#3a1450; --card:#ffffff14; --line:#ffffff26;
+  --text:#f6efff; --muted:#c9b8e6; --accent:#ff7ab6; --gold:#ffd36e; --ok:#7ee0a5;
+}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%}
+body{
+  font-family:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+  color:var(--text);
+  background:radial-gradient(1200px 700px at 20% -10%,#5b2a86 0%,transparent 60%),
+             radial-gradient(900px 600px at 100% 10%,#8a2a6a 0%,transparent 55%),
+             linear-gradient(160deg,var(--bg1),var(--bg2));
+  background-attachment:fixed;
+}
+#fx{position:fixed;inset:0;width:100%;height:100%;pointer-events:none;z-index:50}
+main{max-width:880px;margin:0 auto;padding:40px 18px 80px}
+header{text-align:center;margin-bottom:34px}
+.eyebrow{letter-spacing:.2em;text-transform:uppercase;font-size:12px;color:var(--gold);margin:0 0 10px}
+h1{font-size:clamp(34px,7vw,56px);margin:0 0 12px;line-height:1.05;
+  background:linear-gradient(90deg,#fff,var(--accent),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+.sub{color:var(--muted);margin:0 0 10px;line-height:1.5}
+.clock{font-size:13px;color:#ffffff80;margin:0}
+
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(190px,1fr));gap:14px}
+.card{
+  position:relative;border:1px solid var(--line);background:var(--card);
+  border-radius:20px;padding:20px 16px;text-align:left;color:inherit;font:inherit;cursor:pointer;
+  backdrop-filter:blur(8px);transition:transform .2s,border-color .2s,box-shadow .2s;min-height:150px;
+  display:flex;flex-direction:column;justify-content:space-between;
+}
+.card:hover{transform:translateY(-3px)}
+.card .num{font-size:44px;font-weight:800;line-height:1}
+.card .mon{font-size:13px;color:var(--muted);margin-left:4px;font-weight:500}
+.card .st{font-size:13px;color:var(--muted);margin-top:14px;line-height:1.35}
+.card .ic{position:absolute;right:14px;top:12px;font-size:22px}
+.card.locked{opacity:.55;cursor:default}
+.card.locked:hover{transform:none}
+.card.riddle{border-color:var(--accent);box-shadow:0 0 0 1px var(--accent) inset,0 0 30px #ff7ab633;animation:pulse 2.2s infinite}
+.card.waiting{border-color:var(--gold)}
+.card.open{border-color:var(--ok);background:#7ee0a512}
+.card.finale .num{background:linear-gradient(90deg,var(--accent),var(--gold));-webkit-background-clip:text;background-clip:text;color:transparent}
+@keyframes pulse{50%{box-shadow:0 0 0 1px var(--accent) inset,0 0 44px #ff7ab666}}
+
+dialog{
+  width:min(560px,calc(100vw - 24px));max-height:calc(100vh - 24px);overflow:auto;
+  border:1px solid var(--line);border-radius:24px;padding:28px 24px;color:var(--text);
+  background:linear-gradient(160deg,#2a1348,#44175a);box-shadow:0 30px 80px #000a;
+}
+dialog::backdrop{background:#0009;backdrop-filter:blur(4px)}
+.close{position:absolute;right:14px;top:10px;background:none;border:0;color:var(--muted);font-size:30px;cursor:pointer}
+dialog h2{margin:0 0 6px;font-size:26px}
+dialog .date{color:var(--gold);font-size:13px;letter-spacing:.12em;text-transform:uppercase;margin-bottom:14px}
+.greet{line-height:1.6;white-space:pre-line;margin:0 0 16px}
+.riddle{border-left:3px solid var(--accent);padding:6px 0 6px 14px;margin:0 0 18px;font-style:italic;line-height:1.6;white-space:pre-line}
+form{display:flex;gap:8px;flex-wrap:wrap}
+input[type=text]{flex:1;min-width:160px;padding:12px 14px;border-radius:12px;border:1px solid var(--line);
+  background:#0003;color:var(--text);font:inherit}
+input[type=text]:focus{outline:2px solid var(--accent)}
+.btn{padding:12px 18px;border-radius:12px;border:0;background:linear-gradient(90deg,var(--accent),#c26bff);color:#fff;font:inherit;font-weight:600;cursor:pointer}
+.btn:disabled{opacity:.6}
+.msg{min-height:22px;margin:10px 0 0;font-size:14px}
+.msg.err{color:#ffb0b0}.msg.ok{color:var(--ok)}
+.hint{margin-top:8px;font-size:14px;color:var(--muted)}
+.hint button{background:none;border:0;color:var(--gold);cursor:pointer;font:inherit;text-decoration:underline;padding:0}
+.big{font-size:30px;font-weight:700;color:var(--gold);text-align:center;margin:8px 0}
+.gift{border:1px solid var(--line);background:#ffffff10;border-radius:16px;padding:16px;margin-top:12px;animation:pop .5s both}
+.gift .e{font-size:34px}
+.gift h3{margin:6px 0 4px;font-size:19px}
+.gift p{margin:0;line-height:1.55;color:#eadcff;white-space:pre-line}
+.final{margin-top:18px;text-align:center;font-size:19px;line-height:1.6;white-space:pre-line}
+@keyframes pop{from{opacity:0;transform:translateY(10px) scale(.97)}}

@@ -1,0 +1,139 @@
+{
+ "title": "Адвент-календарь для Алёны",
+ "iter": 150000,
+ "days": [
+  {
+   "id": "2026-11-02",
+   "riddleAt": "2026-11-02T15:00:00.000Z",
+   "revealAt": "2026-11-02T15:30:00.000Z",
+   "finale": false,
+   "giftCount": 1,
+   "greeting": "ЗАМЕНИ: тёплое поздравление на 2 ноября. До дня рождения осталось 6 дней, и каждый вечер тебя ждёт сюрприз.",
+   "riddle": "ЗАМЕНИ: загадка. (Для теста ответ: тест)",
+   "hint": "ЗАМЕНИ: подсказка (необязательно, можно удалить поле)",
+   "wraps": [
+    {
+     "salt": "poHXZfSOZUsB0E+ULb/5ww==",
+     "iv": "bc9TzF5FRZ0ufVIm",
+     "ct": "IOZ0g6uJdx/PTfWVpI8Fy4L7jbCFzVh+/mbbwp4q8VHecMeZJUjcaLoQKupp1K6/"
+    }
+   ],
+   "iv": "c2hGK4xUlSAop5yO",
+   "ct": "tLRocRlln2dx0ZwIZfCDEvW7fPtdkrci6cWk7IEdJRuKVpqhtNxHtAM+WI7uFLZZ+u1assNVxmM5m6JxBZdlRJe/o3oKK1kJAnwmbcYg/84pEEVcZ9jREcSq1Np+bSOmHeLUwrbK9zflkDeo1nOQKjA0QOCwQA/8lF809JzIBFM2nfEK0fMdAoKQyiJdoUDhmIlC9WV94Tl4020ZTn3zJbJMqwbvgIEzm1FeeQZSvZIbYEui/aVFdlUBO3JrwdfIrE1dpDfap+J3bkRp6s7y5A=="
+  },
+  {
+   "id": "2026-11-03",
+   "riddleAt": "2026-11-03T15:00:00.000Z",
+   "revealAt": "2026-11-03T15:30:00.000Z",
+   "finale": false,
+   "giftCount": 1,
+   "greeting": "ЗАМЕНИ",
+   "riddle": "ЗАМЕНИ",
+   "hint": null,
+   "wraps": [
+    {
+     "salt": "AGxawVXguDYWaHkbxRCaig==",
+     "iv": "xGw3iroyrB0J9vC5",
+     "ct": "283Mn54YMj3BIRQP+qY951TI0tWd5UlojcGHUJe4w0U+d6kfOZh8EZT0vbkirpf/"
+    }
+   ],
+   "iv": "fl7P2dRz0SGLXJYM",
+   "ct": "UqL1mYMLg75qopZq3srFH9Wy0t6mF8RsWQ47a23leoPm0j+Lmii2WsUqusMlTNPbSBOxZ3B5PWN9p1+sOePTaVoMnv5R1zNxNu3N/CBTJEfTTN2Zdoa9Sip5jYqMRQ2VkdmWuteyehRhtvAUsQ=="
+  },
+  {
+   "id": "2026-11-04",
+   "riddleAt": "2026-11-04T15:00:00.000Z",
+   "revealAt": "2026-11-04T15:30:00.000Z",
+   "finale": false,
+   "giftCount": 1,
+   "greeting": "ЗАМЕНИ",
+   "riddle": "ЗАМЕНИ",
+   "hint": null,
+   "wraps": [
+    {
+     "salt": "LGRdy60o91DP43ZkY7QX0w==",
+     "iv": "3/5kPZcFzSsmY3bX",
+     "ct": "xzvOz2h2ituI+BIIwtqMaB48hZ5vcaGy9mQzKyZoDu0zQMDxEktF1zsLRKI/062a"
+    }
+   ],
+   "iv": "CyhSA6zh00eOSk1i",
+   "ct": "KhPtpLWFRM+bLeYhxOdJe+I8Z8je7hJK+VBBVyVbH9Ts4VUngO9621HpvUj6Imz9aGe5YcQjOj3alHB34oMFDAO6lXGO5DGo+XyWY67dyGHpNEdAH+s2VKNW+KErunNk9X4RInxUGKQHHMWKgQ=="
+  },
+  {
+   "id": "2026-11-05",
+   "riddleAt": "2026-11-05T15:00:00.000Z",
+   "revealAt": "2026-11-05T15:30:00.000Z",
+   "finale": false,
+   "giftCount": 1,
+   "greeting": "ЗАМЕНИ",
+   "riddle": "ЗАМЕНИ",
+   "hint": null,
+   "wraps": [
+    {
+     "salt": "h0+ZG6xJnMm/VETg7UfKuA==",
+     "iv": "HdjBC5xOa1IHYh4i",
+     "ct": "5TQJvI46eMKqlR4wgUkT0tiZ36zSn57w9T2OHetgtGx+l9i+KyfKel+n7Taem9Dd"
+    }
+   ],
+   "iv": "V6hASyEfDSqfBNkn",
+   "ct": "a5B+eomZYYTcVZT2/M/Z/ysDMJAUgjv9VPnKwrxEAXQz0L1lGz/KpdiQDL0EilOHevrD2VcBAOTWLSsSHQ8Tvnsqyzu+wnTT34exUAIREYFKrRw5w1rtEeDm4mRVVLxvOH2nFaq8NKG9ZHMWdg=="
+  },
+  {
+   "id": "2026-11-06",
+   "riddleAt": "2026-11-06T15:00:00.000Z",
+   "revealAt": "2026-11-06T15:30:00.000Z",
+   "finale": false,
+   "giftCount": 1,
+   "greeting": "ЗАМЕНИ",
+   "riddle": "ЗАМЕНИ",
+   "hint": null,
+   "wraps": [
+    {
+     "salt": "0cHGiYc0ZhLSo/IHZ5IEOQ==",
+     "iv": "NEJB4obEa72DUdiL",
+     "ct": "uHhrucYSrsGfs4bCI3OENPdrrVie76jv9o/o4+6oSaackz7Q9Q54WbvttTp5mRyO"
+    }
+   ],
+   "iv": "lOvnVGffL610uaMQ",
+   "ct": "IlxFXEomQlsKYzzFTW8RGgyQ/1Zh++OHMeMCJFA7raRlkoTGhFZnTvcoND+cXLOF/HwgOIn8r2Rv3rsJC3lIXnBQh9jlZVEeAFiuvJRh+HoZCvZm3gAnlZ/f1A3sn+dOiRAzC++ECGEfk4q1vA=="
+  },
+  {
+   "id": "2026-11-07",
+   "riddleAt": "2026-11-07T15:00:00.000Z",
+   "revealAt": "2026-11-07T15:30:00.000Z",
+   "finale": false,
+   "giftCount": 2,
+   "greeting": "ЗАМЕНИ",
+   "riddle": "ЗАМЕНИ",
+   "hint": null,
+   "wraps": [
+    {
+     "salt": "IRDkWgePECz3h0iMzKqwSg==",
+     "iv": "8TWrxpPrgWBSJdNs",
+     "ct": "LUzvqKg9zkD9Wz4izys1mYHlqd3DHStnkUvrC/KjrMTNWtvkALXQ8ICvrqaAO6vh"
+    }
+   ],
+   "iv": "uoWJEd7AELU4aZwT",
+   "ct": "BmpFYPEBKadc+Wf3kvub/151IIXKzWKC4E2kAvQqXFaWjd/HUA6lIxl/m5O0TYuyKLURozN/pVED9yM5ddX5HTKmIJQ4dcEnWQPksGa3nm3N37nRDEpy5je+V+hhcCXbDkfWovxEf+CRaagOj34DgRPkVI8+M+Nuvbw3yj0fUkFXDCUv+4SOjXYSDn4P/W3U7tcUm1EFt+0V++MjHWCBM5rS7RjrblZtDpQAUfg1/2xe3m15PQc+wFyXxpIVpctSe9FTNubKnwnD1GyHbSXe0dA3r3X2av5Hto8T6jPPug=="
+  },
+  {
+   "id": "2026-11-08",
+   "riddleAt": "2026-11-08T15:00:00.000Z",
+   "revealAt": "2026-11-08T15:30:00.000Z",
+   "finale": true,
+   "giftCount": 2,
+   "greeting": "ЗАМЕНИ: главное поздравление с днём рождения.",
+   "riddle": "ЗАМЕНИ: финальная загадка",
+   "hint": null,
+   "wraps": [
+    {
+     "salt": "jk2gmAJAJ5GSu/mEJZeDpw==",
+     "iv": "H+N9BX4fOAz5FGPp",
+     "ct": "YJr1BimWZJbz8CnyqNqxVpYDwnV63uPc9Kn3eFpT5PJeyPDNWM0Qb+C6O2cF4usg"
+    }
+   ],
+   "iv": "b1Gqw/sfT5rVPYjy",
+   "ct": "QxRmZ5CcFDquzQJ1MVI8Sv+V7hl8VCK0g0eR9QqZ7KKARF97p8UThhlc0RZXgNUuOL6VKQLECEPRaAem5YI7pMJVkLZYhcalHcXjQOwjVUsm9FwtVq5tkZSlZOhp/XLhmFloSKpPJT4b7Y7519aYnaMYC0AwVFLXdRNlcUTneO16Rwxz2HxGBvrF82d3a0+dcnFvFfeaxC9DDRo5s8mfE9qqQWea/Ab7Z4xCbRUqtY3c9VxxWtYEPW+aid53necuDZNdvTT9EctjpxpJSRF/MEjWU53TjALZvwga6nFsM7W59VOUl79+SS/tqLi5DtvTMl6h9P/ErDOF/dnx4xPFKRWR/fwx0OaeJYQyaR6159ZsrHB0EzqPP0iK0tqYD8umCFs9ZaUOgY0kryUhqDORQA6AF4PcNgbUKhj1PxqryZse/rIXngPbhZzzUlu9RX+R9R99BVo="
+  }
+ ]
+}

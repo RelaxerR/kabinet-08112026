@@ -1,0 +1,9 @@
+gifts.source.json
+node_modules/
+.DS_Store
+
+# Фотографии не публикуем, пока не решено, как их показывать
+photos/together/*
+photos/alyona/*
+photos/inbox/*
+!photos/**/.gitkeep

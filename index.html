@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Адвент-календарь 🎁</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<canvas id="fx"></canvas>
+
+<main>
+  <header>
+    <p class="eyebrow">7 вечеров · 9 подарков</p>
+    <h1>Адвент-календарь</h1>
+    <p class="sub">Каждый вечер в 18:00 по Москве тебя ждёт загадка.<br>Ответишь — через полчаса откроется подарок.</p>
+    <p id="clock" class="clock"></p>
+  </header>
+
+  <section id="grid" class="grid" aria-label="Дни"></section>
+</main>
+
+<dialog id="dlg">
+  <button id="close" class="close" aria-label="Закрыть">×</button>
+  <div id="dlgBody"></div>
+</dialog>
+
+<script src="app.js" type="module"></script>
+</body>
+</html>
