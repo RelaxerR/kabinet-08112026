@@ -2,7 +2,7 @@
   'use strict';
   // ====== НАСТРОЙКИ ======
   // Перед публикацией поставь false: тогда ?now=... и ?reset перестанут работать.
-  var DEBUG_ENABLED = true;
+  var DEBUG_ENABLED = false;
   // =======================
   var app = document.getElementById('app'), dlg = document.getElementById('dlg');
   var q = new URLSearchParams(location.search);
