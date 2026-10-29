@@ -189,7 +189,7 @@ function renderDialog(day) {
 
   if (st === "open") {
     const c = opened[day.id];
-    body.innerHTML = heroHTML(day, day.finale ? "С днём рождения! 💝" : "Твой подарок") + polaroidHTML(day) +
+    body.innerHTML = heroHTML(day, day.finale ? "С Днём рождения! 💝" : "Твой подарок") + polaroidHTML(day) +
       `<div class="content">` +
       c.gifts.map((g, i) => `<div class="gift" style="animation-delay:${i * 0.15}s"><div class="e">${esc(g.emoji || "🎁")}</div><h3>${esc(g.title)}</h3><p>${esc(g.text)}</p></div>`).join("") +
       (c.finalMessage ? `<div class="final">${esc(c.finalMessage)}</div>` : "") + `</div>`;
