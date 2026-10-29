@@ -8,6 +8,7 @@ const dec = new TextDecoder();
 const $ = (s) => document.querySelector(s);
 const b64 = (s) => Uint8Array.from(atob(s), (c) => c.charCodeAt(0));
 const norm = (s) => s.toLowerCase().replace(/ё/g, "е").replace(/[^\p{L}\p{N}]/gu, "");
+const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 
 const store = {
   get() { try { return JSON.parse(localStorage.getItem("adv_answers") || "{}"); } catch { return {}; } },
@@ -34,7 +35,8 @@ const now = () => (debugBase !== null ? debugBase + (performance.now() - bootPer
 
 // ---------- данные и расшифровка ----------
 let DATA;
-const opened = {}; // id -> расшифрованный контент
+const opened = {};    // id дня -> { gifts, finalMessage, key }
+const mediaUrls = {}; // id дня -> [blob-url | null, ...]
 
 async function tryDecrypt(day, answer) {
   const n = norm(answer);
@@ -48,10 +50,26 @@ async function tryDecrypt(day, answer) {
       const raw = await crypto.subtle.decrypt({ name: "AES-GCM", iv: b64(w.iv) }, k, b64(w.ct));
       const ck = await crypto.subtle.importKey("raw", raw, "AES-GCM", false, ["decrypt"]);
       const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv: b64(day.iv) }, ck, b64(day.ct));
-      return JSON.parse(dec.decode(pt));
+      return { ...JSON.parse(dec.decode(pt)), key: ck };
     } catch {}
   }
   return null;
+}
+
+// Расшифровываем фото/видео дня (после верного ответа) и превращаем в blob-ссылки
+async function loadMedia(day) {
+  const o = opened[day.id];
+  if (!o || mediaUrls[day.id] || !day.media || !day.media.length) return;
+  mediaUrls[day.id] = new Array(day.media.length).fill(null);
+  await Promise.all(day.media.map(async (m, i) => {
+    try {
+      const buf = await (await fetch(m.file)).arrayBuffer();
+      const pt = await crypto.subtle.decrypt({ name: "AES-GCM", iv: b64(m.iv) }, o.key, buf);
+      mediaUrls[day.id][i] = URL.createObjectURL(new Blob([pt], { type: m.type }));
+    } catch (e) { console.warn("media", m.file, e); }
+  }));
+  renderGrid();
+  if (dlg.open && currentDay && currentDay.id === day.id) renderDialog(day);
 }
 
 // ---------- состояния ----------
@@ -64,6 +82,7 @@ function state(day) {
 const fmtDate = (iso) => new Date(iso).toLocaleDateString("ru-RU", { day: "numeric", month: "long", timeZone: "Europe/Moscow" });
 const dayNum = (iso) => new Date(iso).toLocaleDateString("ru-RU", { day: "numeric", timeZone: "Europe/Moscow" });
 const monthName = (iso) => new Date(iso).toLocaleDateString("ru-RU", { month: "long", timeZone: "Europe/Moscow" });
+const capOf = (m) => m.caption || (m.date ? new Date(m.date + "T12:00:00+03:00").toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Moscow" }) : "");
 function left(ms) {
   const s = Math.max(0, Math.ceil(ms / 1000));
   const d = Math.floor(s / 86400), h = Math.floor((s % 86400) / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
@@ -80,13 +99,20 @@ function renderGrid() {
     const b = document.createElement("button");
     b.className = `card ${st}${day.finale ? " finale" : ""}`;
     b.dataset.id = day.id;
+    const m0 = day.media && day.media[0];
+    if (m0) {
+      const u0 = (mediaUrls[day.id] || [])[0];
+      const real = u0 && m0.type.startsWith("image");
+      b.classList.add("has-ph", real ? "ph-clear" : "ph-blur");
+      b.style.setProperty("--ph", `url("${real ? u0 : m0.thumb}")`);
+    }
     const icon = { locked: "🔒", riddle: "❓", waiting: "⏳", open: day.finale ? "💝" : "🎁" }[st];
     let text = "";
     if (st === "locked") text = `Откроется в 18:00 МСК<br><span data-cd="${day.riddleAt}"></span>`;
     if (st === "riddle") text = "Загадка уже ждёт тебя ✨";
     if (st === "waiting") text = `Ответ верный! Подарок появится через <span data-cd="${day.revealAt}"></span>`;
     if (st === "open") text = day.giftCount > 1 ? `Подарков: ${day.giftCount} — открыто` : "Подарок открыт";
-    b.innerHTML = `<span class="ic">${icon}</span><div><span class="num">${dayNum(day.id + "T12:00:00+03:00")}</span><span class="mon">${monthName(day.id + "T12:00:00+03:00")}</span></div><div class="st">${text}</div>`;
+    b.innerHTML = `<span class="ic">${icon}</span><div class="top"><span class="num">${dayNum(day.id + "T12:00:00+03:00")}</span><span class="mon">${monthName(day.id + "T12:00:00+03:00")}</span></div><div class="st">${text}</div>`;
     b.addEventListener("click", () => openDay(day));
     grid.appendChild(b);
   });
@@ -122,33 +148,68 @@ function openDay(day) {
   if (!dlg.open) dlg.showModal();
 }
 
+// Верх страницы дня: большое фото (до ответа — размытое пятно, после — настоящее) с заголовком
+function heroHTML(day, title) {
+  const m = day.media || [];
+  const date = `<div class="date">${fmtDate(day.riddleAt)}</div>`;
+  if (!m.length) return `<div class="plain">${date}<h2>${esc(title)}</h2></div>`;
+  const solved = !!opened[day.id];
+  const u0 = (mediaUrls[day.id] || [])[0];
+  const img = u0 && m[0].type.startsWith("image")
+    ? `<img class="hero-img" src="${u0}" alt="">`
+    : `<div class="hero-img blurred" style="background-image:url('${m[0].thumb}')"></div>`;
+  return `<div class="hero${solved ? "" : " sealed"}">${img}<div class="hero-shade"></div>
+    <div class="hero-title">${date}<h2>${esc(title)}</h2></div>
+    ${solved ? "" : `<div class="hero-note">Фото проявятся после ответа</div>`}</div>`;
+}
+
+// Второе фото (или видео) — «полароид» поверх страницы
+function polaroidHTML(day) {
+  const m1 = (day.media || [])[1];
+  if (!m1) return "";
+  const url = (mediaUrls[day.id] || [])[1];
+  const isVid = m1.type.startsWith("video");
+  let inner;
+  if (url) inner = isVid
+    ? `<video src="${url}" controls playsinline preload="metadata"></video>`
+    : `<img src="${url}" alt="">`;
+  else inner = `<div class="blurred" style="background-image:url('${m1.thumb}')"></div>`;
+  return `<figure class="polaroid${isVid ? " video" : ""}${url ? "" : " sealed"}">${inner}<figcaption>${esc(capOf(m1))}</figcaption></figure>`;
+}
+
 function renderDialog(day) {
   const body = $("#dlgBody");
+  body.className = "sheet";
   const st = state(day);
-  const head = `<div class="date">${fmtDate(day.riddleAt)}</div>`;
+  const m = day.media || [];
+  const urls = mediaUrls[day.id] || [];
+  const bgSrc = (m[1] && urls[1] && m[1].type.startsWith("image") && urls[1]) || (m[0] && urls[0]) || (m[0] && m[0].thumb) || "";
+  body.style.setProperty("--ph", bgSrc ? `url("${bgSrc}")` : "none");
 
   if (st === "open") {
     const c = opened[day.id];
-    body.innerHTML = head + `<h2>${day.finale ? "С днём рождения! 💝" : "Твой подарок"}</h2>` +
+    body.innerHTML = heroHTML(day, day.finale ? "С днём рождения! 💝" : "Твой подарок") + polaroidHTML(day) +
+      `<div class="content">` +
       c.gifts.map((g, i) => `<div class="gift" style="animation-delay:${i * 0.15}s"><div class="e">${esc(g.emoji || "🎁")}</div><h3>${esc(g.title)}</h3><p>${esc(g.text)}</p></div>`).join("") +
-      (c.finalMessage ? `<div class="final">${esc(c.finalMessage)}</div>` : "");
+      (c.finalMessage ? `<div class="final">${esc(c.finalMessage)}</div>` : "") + `</div>`;
     if (day.finale && !day.fxShown) { day.fxShown = true; startFinale(); }
     return;
   }
 
   if (st === "waiting") {
-    body.innerHTML = head + `<h2>Верно! 🎉</h2><p class="greet">Подарок появится в 18:30 по Москве.</p>
-      <div class="big" data-cd="${day.revealAt}"></div>`;
+    body.innerHTML = heroHTML(day, "Верно! 🎉") + polaroidHTML(day) +
+      `<div class="content"><p class="greet">Подарок появится в 18:30 по Москве.</p>
+      <div class="big" data-cd="${day.revealAt}"></div></div>`;
     return;
   }
 
   // riddle
-  body.innerHTML = head + `<h2>Загадка дня</h2>
+  body.innerHTML = heroHTML(day, "Загадка дня") + polaroidHTML(day) + `<div class="content">
     <p class="greet">${esc(day.greeting)}</p>
     <div class="riddle">${esc(day.riddle)}</div>
     <form id="f"><input type="text" id="ans" placeholder="Твой ответ" autocomplete="off" required><button class="btn" id="go">Проверить</button></form>
     <p class="msg" id="msg"></p>
-    ${day.hint ? `<div class="hint">${hintShown[day.id] ? esc(day.hint) : `<button type="button" id="hb">Нужна подсказка?</button>`}</div>` : ""}`;
+    ${day.hint ? `<div class="hint">${hintShown[day.id] ? esc(day.hint) : `<button type="button" id="hb">Нужна подсказка?</button>`}</div>` : ""}</div>`;
   $("#f").addEventListener("submit", async (e) => {
     e.preventDefault();
     const btn = $("#go"), msg = $("#msg");
@@ -157,13 +218,13 @@ function renderDialog(day) {
     btn.disabled = false;
     if (!res) { msg.className = "msg err"; msg.textContent = "Хм, не то. Подумай ещё 🙂"; return; }
     opened[day.id] = res; store.set(day.id, $("#ans").value);
+    loadMedia(day);
     renderGrid(); renderDialog(day);
   });
   const hb = $("#hb");
   if (hb) hb.addEventListener("click", () => { hintShown[day.id] = true; renderDialog(day); });
 }
 
-const esc = (s) => String(s ?? "").replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
 $("#close").addEventListener("click", () => dlg.close());
 dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); });
 
@@ -215,4 +276,5 @@ function startFinale() {
   }
   renderGrid(); tick();
   setInterval(tick, 1000);
+  DATA.days.forEach((day) => { if (opened[day.id]) loadMedia(day); });
 })();

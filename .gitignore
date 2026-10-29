@@ -7,3 +7,5 @@ photos/together/*
 photos/alyona/*
 photos/inbox/*
 !photos/**/.gitkeep
+photos/web/*
+!photos/web/.gitkeep
