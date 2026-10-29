@@ -134,3 +134,7 @@ dialog p{margin:8px 0 16px;font-size:16px;line-height:1.5}
   .words p,.all .ph{opacity:1}
   .heart{opacity:.55;bottom:var(--y,20%)}
 }
+
+/* фото подарка из карточки товара */
+.gift .gimg{margin:10px 0 4px;background:#fff;padding:6px;box-shadow:0 3px 6px rgba(40,20,5,.35);transform:rotate(-.8deg)}
+.gift .gimg img{display:block;width:100%;max-height:300px;object-fit:contain;background:#fff}

@@ -9,3 +9,7 @@ photos/inbox/*
 !photos/**/.gitkeep
 photos/web/*
 !photos/web/.gitkeep
+
+# фото подарков из карточек товара (спойлеры): в репо только зашифрованные media/*.bin
+photos/gifts/*
+!photos/gifts/.gitkeep

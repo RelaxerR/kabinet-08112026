@@ -11,6 +11,7 @@
   var opened = {};     // id дня -> { gifts, ps, finaleText, key }
   var mediaUrls = {};  // id дня -> [blobUrl|null]
   var mediaBusy = {};
+  var giftUrls = {};   // id дня -> [blobUrl|null] (фото подарков из карточек товара)
   var justAnswered = null, pendingHint = null;
   var ROT = [-1.5, 1.2, -0.8, 1.5, -1.2, 1];
   var sig = '';
@@ -60,13 +61,20 @@
   function loadMedia(day) {
     var c = opened[day.id];
     if (!c || mediaBusy[day.id]) return mediaBusy[day.id] || Promise.resolve();
-    mediaUrls[day.id] = [];
-    mediaBusy[day.id] = Promise.all(day.media.map(function (m, i) {
+    mediaUrls[day.id] = []; giftUrls[day.id] = [];
+    var gi = (day.giftImgs || []).map(function (m, i) {
+      if (!m) return null;
+      return fetch(m.file).then(function (r) { if (!r.ok) throw 0; return r.arrayBuffer(); })
+        .then(function (buf) { return crypto.subtle.decrypt({ name: 'AES-GCM', iv: b64(m.iv) }, c.key, buf); })
+        .then(function (pt) { giftUrls[day.id][i] = URL.createObjectURL(new Blob([pt], { type: m.type })); })
+        .catch(function () { giftUrls[day.id][i] = null; });
+    });
+    mediaBusy[day.id] = Promise.all(gi.concat(day.media.map(function (m, i) {
       return fetch(m.file).then(function (r) { if (!r.ok) throw 0; return r.arrayBuffer(); })
         .then(function (buf) { return crypto.subtle.decrypt({ name: 'AES-GCM', iv: b64(m.iv) }, c.key, buf); })
         .then(function (pt) { mediaUrls[day.id][i] = URL.createObjectURL(new Blob([pt], { type: m.type })); })
         .catch(function () { mediaUrls[day.id][i] = null; });
-    }));
+    })));
     return mediaBusy[day.id];
   }
 
@@ -75,9 +83,10 @@
   function state(d) {
     if (now() < openAt(d)) return 'closed';
     if (!opened[d.id]) return 'riddle';
-    if (d.final) return 'open';
-    return now() < Date.parse(d.revealAt) ? 'wait' : 'open';
+    return 'open';
   }
+  // «Где искать» открывается в 18:30: к этому времени подарок уже лежит на месте
+  function ready(d) { return now() >= Date.parse(d.revealAt); }
   function eNo(d) { var k = 1; for (var i = 0; i < D.length && D[i] !== d; i++) k += D[i].giftCount; return k; }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
   var DELAY = function (d) { return Date.parse(d.revealAt) - Date.parse(d.riddleAt); };
@@ -113,12 +122,10 @@
       return '<a class="note env ' + side + '" href="' + href + '" style="' + r + '" aria-label="День ' + d.n + ', запечатано"><i class="pin"></i><div class="lab">' + num + ' · ' +
         (first ? '<span data-cd="' + openAt(d) + '">' + fmt(openAt(d) - now()) + '</span>' : d.n + '.11 в 18:00') + '</div><span class="sticker">18:00</span></a>';
     }
-    var mode = s === 'riddle' ? 'lock' : s === 'wait' ? 'wait' : 'open', inner;
-    if (s === 'open') inner = '<div class="st">Подарок выдан</div><div class="sub">Вещдок №' + eNo(d) + (d.giftCount > 1 ? '–' + (eNo(d) + d.giftCount - 1) : '') + '</div>';
-    else if (s === 'wait') inner = '<div class="st">Ответ принят</div><div class="sub">проявка… подарок через <span data-cd="' + Date.parse(d.revealAt) + '">00:00</span></div>';
+    var mode = s === 'riddle' ? 'lock' : 'open', inner;
+    if (s === 'open') inner = '<div class="st">Подарок выдан</div><div class="sub">' + (ready(d) ? 'Вещдок №' + eNo(d) + (d.giftCount > 1 ? '–' + (eNo(d) + d.giftCount - 1) : '') : 'адрес откроется в 18:30') + '</div>';
     else inner = '<div class="st"><span class="lamp"></span>Новая загадка</div><span class="mini">Читать письмо →</span>';
-    var bar = s === 'wait' ? '<div class="bar"><i data-prog="' + openAt(d) + '" data-dur="' + DELAY(d) + '"></i></div>' : '';
-    return '<a class="note ' + side + (s === 'riddle' ? ' riddle' : '') + '" href="' + href + '" style="' + r + '"><i class="pin"></i><div class="g"><div class="pol">' + photo(d, 1, mode) + '</div><div><div class="n">' + num + '</div>' + inner + '</div></div>' + bar + '</a>';
+    return '<a class="note ' + side + (s === 'riddle' ? ' riddle' : '') + '" href="' + href + '" style="' + r + '"><i class="pin"></i><div class="g"><div class="pol">' + photo(d, 1, mode) + '</div><div><div class="n">' + num + '</div>' + inner + '</div></div></a>';
   }
   function home() {
     app.className = '';
@@ -153,11 +160,19 @@
       '<p style="margin:0 0 12px;font-size:16px;line-height:1.5">Канцелярия работает по графику. Поступит в 18:00 по Ижевску.</p><div class="cd" data-cd="' + openAt(d) + '">' + fmt(openAt(d) - now()) + '</div></div>';
   }
   function giftsHtml(d) {
-    var c = opened[d.id], n = eNo(d);
-    return c.gifts.map(function (g, i) {
-      return '<div class="paper gift"><i class="pin"></i><div class="eyebrow" style="color:#B8352B;font-weight:600">ВЕЩДОК №' + (n + i) + '</div><h2>' + esc(g.title) + '</h2><p>' + esc(g.text) + '</p></div>' +
-        '<div class="where"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#7A1F1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><div><div class="eyebrow" style="font-weight:600;color:#2B2118">Где искать</div><div style="font-size:16px;line-height:1.45;margin-top:4px">' + esc(g.where) + '</div></div></div>';
+    var c = opened[d.id], n = eNo(d), rdy = ready(d), gu = giftUrls[d.id] || [];
+    var out = c.gifts.map(function (g, i) {
+      return '<div class="paper gift"><i class="pin"></i><div class="eyebrow" style="color:#B8352B;font-weight:600">ВЕЩДОК №' + (n + i) + '</div>' +
+        (gu[i] ? '<div class="gimg"><img src="' + gu[i] + '" alt=""></div>' : '') +
+        '<h2>' + esc(g.title) + '</h2><p>' + esc(g.text) + '</p></div>' +
+        (rdy ? '<div class="where"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#7A1F1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><div><div class="eyebrow" style="font-weight:600;color:#2B2118">Где искать</div><div style="font-size:16px;line-height:1.45;margin-top:4px">' + esc(g.where) + '</div></div></div>' : '');
     }).join('');
+    if (!rdy) {
+      var end = Date.parse(d.revealAt);
+      out += '<div class="paper wait"><i class="pin"></i><div class="eyebrow">Выдача вещдока</div><div style="font:600 20px/1.25 Literata,serif;margin-top:4px">Канцелярия готовит выдачу…</div>' +
+        '<div class="sub">Адрес откроется в 18:30 по Ижевску, через <b data-cd="' + end + '">' + fmt(end - now()) + '</b></div><div class="bar"><i data-prog="' + openAt(d) + '" data-dur="' + DELAY(d) + '"></i></div></div>';
+    }
+    return out;
   }
   function day(d) {
     var s = state(d), idx = D.indexOf(d), mode = s === 'riddle' ? 'lock' : (justAnswered === d.id ? 'dev' : 'open');
@@ -175,10 +190,6 @@
         '<div class="stack"><button class="btn" type="submit">Отправить ответ</button>' +
         (d.hint && !hints[d.id] ? '<button class="btn ghost" type="button" id="hintbtn">Подсказка</button>' : '') + '</div></form>' +
         (d.hint && hints[d.id] ? '<div class="paper hintbox"><div class="eyebrow">Из протокола · подсказка</div><div style="margin-top:4px;font-size:16px;line-height:1.5">' + d.hint + '</div></div>' : '');
-    } else if (s === 'wait') {
-      var end = Date.parse(d.revealAt);
-      h += '<div class="paper wait"><i class="pin"></i><div class="eyebrow">Ответ принят</div><div style="font:600 20px/1.25 Literata,serif;margin-top:4px">Подарок проявляется…</div>' +
-        '<div class="sub">Откроется через <b data-cd="' + end + '">' + fmt(end - now()) + '</b></div><div class="bar"><i data-prog="' + openAt(d) + '" data-dur="' + DELAY(d) + '"></i></div></div>';
     } else {
       var ps = opened[d.id].ps;
       h += giftsHtml(d) + (ps ? '<div class="paper letter tone-2" style="margin-top:16px"><div class="ps" style="font:500 26px/28px Caveat,cursive">' + esc(ps) + '</div></div>' : '');
@@ -252,7 +263,7 @@
   }
 
   /* ---- маршрутизация и таймер ---- */
-  function signature() { return D.map(state).join() + '|' + Object.keys(mediaUrls).length; }
+  function signature() { return D.map(function (d) { return state(d) + (ready(d) ? 'r' : ''); }).join() + '|' + Object.keys(mediaUrls).length + '|' + Object.keys(giftUrls).length; }
   function route() {
     document.querySelectorAll('.heart').forEach(function (h) { h.remove(); });
     var m = /^#\/day\/(\d+)/.exec(location.hash), d = m && D.filter(function (x) { return x.n === +m[1]; })[0];

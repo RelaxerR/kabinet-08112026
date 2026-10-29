@@ -58,6 +58,17 @@ const days = src.days.map((d) => {
     return { file: rel, iv: iv.toString("base64"), type: m.type, w: m.w, h: m.h, date: ruDate(m.date),
       thumb: `data:image/jpeg;base64,${readFileSync(thumb).toString("base64")}` };
   });
+  // Фото подарков из карточек товара: photos/gifts/<дата>-<номер подарка>.(jpg|jpeg|png|webp), шифруются как всё остальное
+  const giftImgs = d.gifts.map((g, i) => {
+    const ext = ["jpg", "jpeg", "png", "webp"].find((e) => existsSync(P("photos/gifts", `${d.date}-${i + 1}.${e}`)));
+    if (!ext) { warn(`${d.date}: нет фото подарка «${g.title}» (photos/gifts/${d.date}-${i + 1}.jpg)`); return null; }
+    const buf = readFileSync(P("photos/gifts", `${d.date}-${i + 1}.${ext}`));
+    if (buf.length > 500 * 1024) warn(`${d.date}-${i + 1}.${ext}: ${Math.round(buf.length / 1024)} КБ, лучше сжать до ~300 КБ`);
+    const { iv, ct } = sealBuf(contentKey, buf);
+    const rel = `media/${d.date}-g${i + 1}.bin`;
+    writeFileSync(P(rel), ct); mediaCount++;
+    return { file: rel, iv: iv.toString("base64"), type: ext === "jpg" ? "image/jpeg" : `image/${ext}` };
+  });
   const riddleAt = new Date(`${d.date}T${pad(rh)}:${pad(rm)}:00${src.timezoneOffset}`);
   return {
     id: d.date, n: +dd, wd: WD[new Date(`${d.date}T12:00:00Z`).getUTCDay()], hue: HUE[dd] || [20, 40],
@@ -65,7 +76,7 @@ const days = src.days.map((d) => {
     revealAt: new Date(riddleAt.getTime() + src.revealDelayMinutes * 60000).toISOString(),
     final: !!d.finale, giftCount: d.gifts.length,
     greet: d.greet, body: d.body, riddle: d.riddle, hint: d.hint || null,
-    media, wraps, iv: content.iv, ct: content.ct,
+    media, giftImgs, wraps, iv: content.iv, ct: content.ct,
   };
 });
 writeFileSync(P("data.json"), JSON.stringify({ title: src.title, iter: ITER, days }, null, 1));
