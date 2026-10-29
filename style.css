@@ -98,3 +98,5 @@ input[type=text]:focus{outline:2px solid var(--accent)}
 .gift p{margin:0;line-height:1.55;color:#eadcff;white-space:pre-line}
 .final{margin-top:18px;text-align:center;font-size:19px;line-height:1.6;white-space:pre-line}
 @keyframes pop{from{opacity:0;transform:translateY(10px) scale(.97)}}
+
+.hint-actions{display:inline-flex;gap:14px;margin-left:4px}

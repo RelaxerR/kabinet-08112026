@@ -139,6 +139,7 @@ function tick() {
 const dlg = $("#dlg");
 let currentDay = null;
 let hintShown = {};
+let hintAsk = {};
 
 function openDay(day) {
   const st = state(day);
@@ -209,7 +210,7 @@ function renderDialog(day) {
     <div class="riddle">${esc(day.riddle)}</div>
     <form id="f"><input type="text" id="ans" placeholder="Твой ответ" autocomplete="off" required><button class="btn" id="go">Проверить</button></form>
     <p class="msg" id="msg"></p>
-    ${day.hint ? `<div class="hint">${hintShown[day.id] ? esc(day.hint) : `<button type="button" id="hb">Нужна подсказка?</button>`}</div>` : ""}</div>`;
+    ${day.hint ? `<div class="hint">${hintShown[day.id] ? esc(day.hint) : hintAsk[day.id] ? `Точно показать подсказку? Попробуй ещё раз подумать сама 🙂 <span class="hint-actions"><button type="button" id="hy">Да, показать</button><button type="button" id="hn">Ещё подумаю</button></span>` : `<button type="button" id="hb">Подсказка</button>`}</div>` : ""}</div>`;
   $("#f").addEventListener("submit", async (e) => {
     e.preventDefault();
     const btn = $("#go"), msg = $("#msg");
@@ -221,8 +222,10 @@ function renderDialog(day) {
     loadMedia(day);
     renderGrid(); renderDialog(day);
   });
-  const hb = $("#hb");
-  if (hb) hb.addEventListener("click", () => { hintShown[day.id] = true; renderDialog(day); });
+  const hb = $("#hb"), hy = $("#hy"), hn = $("#hn");
+  if (hb) hb.addEventListener("click", () => { hintAsk[day.id] = true; renderDialog(day); });
+  if (hy) hy.addEventListener("click", () => { hintShown[day.id] = true; renderDialog(day); });
+  if (hn) hn.addEventListener("click", () => { hintAsk[day.id] = false; renderDialog(day); });
 }
 
 $("#close").addEventListener("click", () => dlg.close());
