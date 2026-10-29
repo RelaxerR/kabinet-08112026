@@ -79,10 +79,10 @@ function state(day) {
   if (opened[day.id]) return t >= Date.parse(day.revealAt) ? "open" : "waiting";
   return "riddle";
 }
-const fmtDate = (iso) => new Date(iso).toLocaleDateString("ru-RU", { day: "numeric", month: "long", timeZone: "Europe/Moscow" });
-const dayNum = (iso) => new Date(iso).toLocaleDateString("ru-RU", { day: "numeric", timeZone: "Europe/Moscow" });
-const monthName = (iso) => new Date(iso).toLocaleDateString("ru-RU", { month: "long", timeZone: "Europe/Moscow" });
-const capOf = (m) => m.caption || (m.date ? new Date(m.date + "T12:00:00+03:00").toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Moscow" }) : "");
+const fmtDate = (iso) => new Date(iso).toLocaleDateString("ru-RU", { day: "numeric", month: "long", timeZone: "Europe/Samara" });
+const dayNum = (iso) => new Date(iso).toLocaleDateString("ru-RU", { day: "numeric", timeZone: "Europe/Samara" });
+const monthName = (iso) => new Date(iso).toLocaleDateString("ru-RU", { month: "long", timeZone: "Europe/Samara" });
+const capOf = (m) => m.caption || (m.date ? new Date(m.date + "T12:00:00+04:00").toLocaleDateString("ru-RU", { day: "numeric", month: "long", year: "numeric", timeZone: "Europe/Samara" }) : "");
 function left(ms) {
   const s = Math.max(0, Math.ceil(ms / 1000));
   const d = Math.floor(s / 86400), h = Math.floor((s % 86400) / 3600), m = Math.floor((s % 3600) / 60), sec = s % 60;
@@ -108,11 +108,11 @@ function renderGrid() {
     }
     const icon = { locked: "🔒", riddle: "❓", waiting: "⏳", open: day.finale ? "💝" : "🎁" }[st];
     let text = "";
-    if (st === "locked") text = `Откроется в 18:00 МСК<br><span data-cd="${day.riddleAt}"></span>`;
+    if (st === "locked") text = `Откроется в 18:00 по Ижевску<br><span data-cd="${day.riddleAt}"></span>`;
     if (st === "riddle") text = "Загадка уже ждёт тебя ✨";
     if (st === "waiting") text = `Ответ верный! Подарок появится через <span data-cd="${day.revealAt}"></span>`;
     if (st === "open") text = day.giftCount > 1 ? `Подарков: ${day.giftCount} — открыто` : "Подарок открыт";
-    b.innerHTML = `<span class="ic">${icon}</span><div class="top"><span class="num">${dayNum(day.id + "T12:00:00+03:00")}</span><span class="mon">${monthName(day.id + "T12:00:00+03:00")}</span></div><div class="st">${text}</div>`;
+    b.innerHTML = `<span class="ic">${icon}</span><div class="top"><span class="num">${dayNum(day.id + "T12:00:00+04:00")}</span><span class="mon">${monthName(day.id + "T12:00:00+04:00")}</span></div><div class="st">${text}</div>`;
     b.addEventListener("click", () => openDay(day));
     grid.appendChild(b);
   });
@@ -120,7 +120,7 @@ function renderGrid() {
 
 function tick() {
   const t = now();
-  $("#clock").textContent = "Сейчас " + new Date(t).toLocaleString("ru-RU", { timeZone: "Europe/Moscow", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" }) + " по Москве";
+  $("#clock").textContent = "Сейчас " + new Date(t).toLocaleString("ru-RU", { timeZone: "Europe/Samara", day: "numeric", month: "long", hour: "2-digit", minute: "2-digit" }) + "";
   document.querySelectorAll("[data-cd]").forEach((el) => (el.textContent = left(Date.parse(el.dataset.cd) - t)));
 
   // перерисовываем сетку, только если у какой-то карточки сменилось состояние
@@ -198,7 +198,7 @@ function renderDialog(day) {
 
   if (st === "waiting") {
     body.innerHTML = heroHTML(day, "Верно! 🎉") + polaroidHTML(day) +
-      `<div class="content"><p class="greet">Подарок появится в 18:30 по Москве.</p>
+      `<div class="content"><p class="greet">Подарок появится в 18:30.</p>
       <div class="big" data-cd="${day.revealAt}"></div></div>`;
     return;
   }

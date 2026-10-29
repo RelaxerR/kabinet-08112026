@@ -4,8 +4,8 @@
  "days": [
   {
    "id": "2026-11-02",
-   "riddleAt": "2026-11-02T15:00:00.000Z",
-   "revealAt": "2026-11-02T15:30:00.000Z",
+   "riddleAt": "2026-11-02T14:00:00.000Z",
+   "revealAt": "2026-11-02T14:30:00.000Z",
    "finale": false,
    "giftCount": 1,
    "greeting": "ЗАМЕНИ: тёплое поздравление на 2 ноября. До дня рождения осталось 6 дней, и каждый вечер тебя ждёт сюрприз.",
@@ -14,7 +14,7 @@
    "media": [
     {
      "file": "media/2026-11-02-1.bin",
-     "iv": "2o7KZKLmoaoCZnYE",
+     "iv": "zJwIXxqzmOOo6g7c",
      "type": "image/jpeg",
      "w": 1200,
      "h": 1600,
@@ -24,7 +24,7 @@
     },
     {
      "file": "media/2026-11-02-2.bin",
-     "iv": "+C3T6e36Fk9ry8OO",
+     "iv": "WTt6clmooto5rSC7",
      "type": "image/jpeg",
      "w": 1200,
      "h": 1600,
@@ -35,18 +35,18 @@
    ],
    "wraps": [
     {
-     "salt": "H5Wdxjc3yqhzf3lZZD9KbA==",
-     "iv": "Eu/h8rt5JBDVhMsc",
-     "ct": "h67/wG28vkfoLu1ugwXkwZzXOlnCgCni5giphahnMaYrNXThUNpSQZ1vYNtyxQ1a"
+     "salt": "JSV4+55WGh3alinFZjQf2g==",
+     "iv": "WiTzTeqCv84cWmrK",
+     "ct": "ubcMxZeMSgm/p6co1Y73IDyZhID695dcTbW9DkSjCHoe0hhju7PCl3EDutD64RcZ"
     }
    ],
-   "iv": "B7xFP3IHtteU+X+Q",
-   "ct": "4Rey4ar1JHiFHwSRHpCoX9JMX82jrRfzStXXdR2sMOpypTwVTKcfWoZ7nqRDJzMys8A8XEborv3+or6cqoBTkjTkAPlzHxVeb1/03M+QIjnAUmag5vtgrM3ns7I/uqan7KuUZuyX6f8a6Fv9VmGa6c76a8Y8e3qZnSdrz3lbd4BR2/LnUdWoubIf1q3V1mydOuSte580EZ/ceMBwzEnOo2o5zBohI+nERPAiBjyQQai88YCvoOiSebLroOJeIog2TmJyZZOwnq0/M7WS3p5u8Q=="
+   "iv": "2g4zuL0XDh7AqsTv",
+   "ct": "I2Q+mrNU88NUdy+5JcMR4VEZAbYDx7GBNXe4yY73Khq/8IJvTc6hWsvBHmkONHDNWqoPraScrjzNDymyCI7hiXq5GWZa/Y6xOjq4DeUn5BOrKCY/UmmT/HfcybZAjWqysO/BUEIaHKAh3Da3mQHpH/FYDncx+kZ/5EjaShl/UUCqIoyxAWLIN9UCNJf+gCgSXT5nPjnJk/1Kw+EkQo13luKiKvjt6veY62dm1oKcogRlM/+HFNUWs9h/mf8CkaXlKOpOG6qa+xWrwWSFey/Smg=="
   },
   {
    "id": "2026-11-03",
-   "riddleAt": "2026-11-03T15:00:00.000Z",
-   "revealAt": "2026-11-03T15:30:00.000Z",
+   "riddleAt": "2026-11-03T14:00:00.000Z",
+   "revealAt": "2026-11-03T14:30:00.000Z",
    "finale": false,
    "giftCount": 1,
    "greeting": "ЗАМЕНИ",
@@ -55,7 +55,7 @@
    "media": [
     {
      "file": "media/2026-11-03-1.bin",
-     "iv": "nltomBH3dWoFQM53",
+     "iv": "DclkCGNcsjB5n9Qa",
      "type": "image/jpeg",
      "w": 1200,
      "h": 1600,
@@ -65,7 +65,7 @@
     },
     {
      "file": "media/2026-11-03-2.bin",
-     "iv": "Tsc33kQIgVo3RHiY",
+     "iv": "5jeokpC7FTJuHlYL",
      "type": "image/jpeg",
      "w": 1200,
      "h": 1600,
@@ -76,18 +76,18 @@
    ],
    "wraps": [
     {
-     "salt": "2r8+mqdV9xK9Z78CXjC7bQ==",
-     "iv": "c31HkPXlDBo1pILd",
-     "ct": "FnB9j4s4MyPHyjgi6zkZ2SAU2mY0TGaFXtTmDaKE9hitnHZmAtf2acttYuW6SsR/"
+     "salt": "IHvsHu0jUCVnQi+Zz4tx1Q==",
+     "iv": "nMXL+micmJMDWF0S",
+     "ct": "g/P52nMpbmit82KyhOcKZBnWUuUAy5MMYypKCGWSyi09TY76wttE1OGln54hiBgw"
     }
    ],
-   "iv": "gSPxqi0eCfe94bZL",
-   "ct": "J4cYX0oJ15fR3wTOR5Zzshw2Ku1cq20DVK9JG79XXbgbn+OQr0Ac2fmv4Gx87iTX+82bheEcdJmdE+qN4dOTYXUbTs49s7ejSUR7Bor/efHP79SDAKjHkrhvhOwj5Kk3YH3zQOwinnuKVbSoow=="
+   "iv": "VhiE4l6PPYr1k8gC",
+   "ct": "zk7hRufPIlEENTeuRvw2JLDhECpkPCWSY+VXvzOJiLIC8bJzdsCvM8cafphKJAIVFab9vhGJ3jTOBVR4dCnMcOgRzY9bl8uWf4URtdmnxFnxI782u5LtWwLx5Td5pC8DQTE078r1CEQZ1ILFAQ=="
   },
   {
    "id": "2026-11-04",
-   "riddleAt": "2026-11-04T15:00:00.000Z",
-   "revealAt": "2026-11-04T15:30:00.000Z",
+   "riddleAt": "2026-11-04T14:00:00.000Z",
+   "revealAt": "2026-11-04T14:30:00.000Z",
    "finale": false,
    "giftCount": 1,
    "greeting": "ЗАМЕНИ",
@@ -96,7 +96,7 @@
    "media": [
     {
      "file": "media/2026-11-04-1.bin",
-     "iv": "/xnll93GiLNvEheJ",
+     "iv": "Ff78sFXLKCvStjOJ",
      "type": "image/jpeg",
      "w": 1200,
      "h": 1600,
@@ -106,7 +106,7 @@
     },
     {
      "file": "media/2026-11-04-2.bin",
-     "iv": "+Iur/osgtEY/DXU5",
+     "iv": "GD/N2Z89/GvxJ3e0",
      "type": "image/jpeg",
      "w": 1200,
      "h": 1600,
@@ -117,18 +117,18 @@
    ],
    "wraps": [
     {
-     "salt": "oOVwEBx1gFCgHPX1xbMMXQ==",
-     "iv": "qVem04mSmo62yziS",
-     "ct": "zYgRccLrRJB5hyLmCmFElIodSavxHAAHgZmn2mBMWPfJ1fNvEvQ/jCGfP4zPannx"
+     "salt": "KaY/2jXChcPqY+Y/kvPbKg==",
+     "iv": "faEM+guHkJVCUQJP",
+     "ct": "2N1JH0MzLL82LTvZHRLMVrynjJaQg1WFV2W4fMq4wwdM1ywQ4CSELoRuu8+/1Va4"
     }
    ],
-   "iv": "rYtP8jbGJv4jqeA2",
-   "ct": "LJVTBN2S9TOokoXpOGyO1ZLTId3tWzFxMQCwGkAh5+OWFsL+VEwwRodU7suW0H57jzYWJFfSE/BRJAKqm4N265GappXUrQcGdd3hbt9CxrFtdgYKsdoYxWU30HUYp8vUixdNB3B4VK9L78CUHQ=="
+   "iv": "iIc16t0PjuKCdNpZ",
+   "ct": "djJUMTJEVSSaQZvr1vNuMW+stDQldNv+tPK7rI39roxXSLLcYQCP73EmragAYbjUScI3ZOUVcpvOiZMaWnt9bMD+x/pAAdT2kRcfGnJ53oUOc39vKXHv4GuQemEKfxIrx2at7bY5QXDDPp45kw=="
   },
   {
    "id": "2026-11-05",
-   "riddleAt": "2026-11-05T15:00:00.000Z",
-   "revealAt": "2026-11-05T15:30:00.000Z",
+   "riddleAt": "2026-11-05T14:00:00.000Z",
+   "revealAt": "2026-11-05T14:30:00.000Z",
    "finale": false,
    "giftCount": 1,
    "greeting": "ЗАМЕНИ",
@@ -137,7 +137,7 @@
    "media": [
     {
      "file": "media/2026-11-05-1.bin",
-     "iv": "AvJLWzyHleyLQvCn",
+     "iv": "046Eqmn3CtFut9uI",
      "type": "image/jpeg",
      "w": 1200,
      "h": 1600,
@@ -147,7 +147,7 @@
     },
     {
      "file": "media/2026-11-05-2.bin",
-     "iv": "UqSWz9/I4ktCiOzA",
+     "iv": "cyy9t9SOxKfTMiKf",
      "type": "image/jpeg",
      "w": 1200,
      "h": 1600,
@@ -158,18 +158,18 @@
    ],
    "wraps": [
     {
-     "salt": "bY1PnQFWkHiZ1tqRVUK46A==",
-     "iv": "cBp6yQ6kvvf8G/Rj",
-     "ct": "ke8q9k+4ul67bggAUT8Nh4H46JtzT2A5bo+EkBH540ht+bLZygCHCPL2RqszfYrn"
+     "salt": "sDm9jQYgt1/yZFQdOeu9bQ==",
+     "iv": "9lomCNDCl+njBert",
+     "ct": "MEvn7A1x9Za7MEjb/aBI9rVavleJvhPXlbcr50pz5GVgQXt16pajXB0FuRFxT/Wh"
     }
    ],
-   "iv": "O8XVTUdrtTKbJ8kQ",
-   "ct": "ag1OUEmLjBzdBqt2yiSYH9iRKbaYjrhj1xqXaZJVncOKWbSA9wFJRiOJF55pSblvwx0k/ufb7uiGH4BYeDJWnnDgdRc/7XxvYUepg7oIDi4+E5hRXolF+bS1IS4jiVlrUAhrror9mJKaP9Lx3A=="
+   "iv": "UNa/rKTeuki+x72p",
+   "ct": "szEqPMVvY7B3xtE6KqjwZVmqarGqRqRxxFeANhj7oQ4Kar3rM+Y6oVchqMjdhW5Mc7+JJwcIH8MqHrzpUnMzu8SFPEMH9dOD3yTX9AiLQy5xcSrh2ilNZ4/tRuW06b7jJ7YM9jm79kNogaLD5g=="
   },
   {
    "id": "2026-11-06",
-   "riddleAt": "2026-11-06T15:00:00.000Z",
-   "revealAt": "2026-11-06T15:30:00.000Z",
+   "riddleAt": "2026-11-06T14:00:00.000Z",
+   "revealAt": "2026-11-06T14:30:00.000Z",
    "finale": false,
    "giftCount": 1,
    "greeting": "ЗАМЕНИ",
@@ -178,7 +178,7 @@
    "media": [
     {
      "file": "media/2026-11-06-1.bin",
-     "iv": "JiM0mgmJZHCPDpT3",
+     "iv": "7QVPtwXZZL5A3Swx",
      "type": "image/jpeg",
      "w": 1200,
      "h": 1600,
@@ -188,7 +188,7 @@
     },
     {
      "file": "media/2026-11-06-2.bin",
-     "iv": "vJr8Cptfr1ccScxk",
+     "iv": "J5MQOpmsGhJJxDJi",
      "type": "image/jpeg",
      "w": 1600,
      "h": 1200,
@@ -199,18 +199,18 @@
    ],
    "wraps": [
     {
-     "salt": "Db1XfzT3qzRL6AnOEh/ZuA==",
-     "iv": "5s5F8XGtx6O0jI/d",
-     "ct": "6bhuPFQEOSUbbo2INcEojHpffTiCKNwQSTwM2agX1V+/9224JqXj5IuCtVhKyjzc"
+     "salt": "jZ47LjaG+kMF5CaiF0cdEg==",
+     "iv": "lrDz5xAEiQGso+5G",
+     "ct": "gsjUyJuKYKHesRtSCqcK0vR0Z8QE6bxdPf17XVWFxWQFl6FUCsL3P1a6KPeF30ym"
     }
    ],
-   "iv": "LCsB2YyzMfWPuSC4",
-   "ct": "nNnRglLr/xSEkgMVLayEfll8WeZNoaQc6iopKMf+511HjGXhhW/+4GxuzyU4GvSvzp8wMYgf8RUaaT0b+67B1BFz4QoNLST9C9M3NAhoVpNVKdkmYyVolq8pUMFByX5vzsPf8vCWqc4ftN9grw=="
+   "iv": "NChigeTxTZUeTYsp",
+   "ct": "YBN7oCBdKVoXmqUIMC2sAbxdeqbdKOyG0lcj79+hk/7h/FnlGFY/hVAsqPyJm+YRNt3MBgSjy6rIgn3+bTVGaobsYF7ZEHahQJcC4jEsS/mja6zQKHoTZxhLCV3kDpn85EUuAZPYuFU/Oc8Ygw=="
   },
   {
    "id": "2026-11-07",
-   "riddleAt": "2026-11-07T15:00:00.000Z",
-   "revealAt": "2026-11-07T15:30:00.000Z",
+   "riddleAt": "2026-11-07T14:00:00.000Z",
+   "revealAt": "2026-11-07T14:30:00.000Z",
    "finale": false,
    "giftCount": 2,
    "greeting": "ЗАМЕНИ",
@@ -219,7 +219,7 @@
    "media": [
     {
      "file": "media/2026-11-07-1.bin",
-     "iv": "YD20soxaoNzIkCeo",
+     "iv": "xv/mz9kLd+6ZsK1x",
      "type": "image/jpeg",
      "w": 1200,
      "h": 1600,
@@ -229,7 +229,7 @@
     },
     {
      "file": "media/2026-11-07-2.bin",
-     "iv": "oRzThhW5JnBxWsQd",
+     "iv": "F6H2KLjq2ptKL/jo",
      "type": "image/jpeg",
      "w": 1200,
      "h": 1600,
@@ -240,18 +240,18 @@
    ],
    "wraps": [
     {
-     "salt": "zIrCjEXDBICqGlBgUEgm7g==",
-     "iv": "OKRn8YpGeVqg3L0L",
-     "ct": "VLorOZgRtYQf3Q5r4o657eCHJ6X6G5laiOPiyskpHiyCcFrvvtPhCuGTW82yqVDX"
+     "salt": "ED89cidWMz63VDeBZdgb9g==",
+     "iv": "aisjxhYV0vw+ydqE",
+     "ct": "x9p56ImV2qAiIb+grve4BDQKhubpsrAzVGzbI7kOq35gYO535pyrd2gNe+ci29+r"
     }
    ],
-   "iv": "ghnmog7yigSrXb2r",
-   "ct": "r6+cGi9f2RG8SzTwuCE8CrWvC9/Ii9itmF9RgjLe7idplu2iewfl20iKyOhhV6jYmgMLuGDKXvc7dV50v024EJwwUf5cvUm0AA3yJRrZGK7Nn/ZS9akeKEcgk64YtBdnJSvXJa5SpccuBROgzhjZZTB3rehGetfoEjwQdo6Ue2YgSDdmWWTK3cOgKSbh3Pu3V7vR412JbC2ADgWA81XI6pxxnqE/GXmmpwzV59E2UpWx4Bc3E8L0vcwH1Ysz4P2N2dsqXjsRa90plQNiJNfxqks0n6Dn3JvB0thQjXa4oA=="
+   "iv": "S+AaiaiuYTLqvupr",
+   "ct": "mfm7wqzhWOmAs8dCo+fZmMgrj5ETf8eRi13r0QHVKsXICA8m/wKA18XUx3x9bdjrU/btpWY2fwtd+yUxhbjfq5mfLhWOlT8SIL9J/e13soPzTKkbomcvSK2u5z/6Y4NaRDZ3NEr5XqBJUvn6vB/EtfIzo338BhA4GSX6ohWFJ5h61OqwkFDoeSnJQe1uLjkCV/SJPTFqypiV5d4IvyVjD2tssBd4xicrkeZq6Zxc/NgKQCX7y/0g9hmrxWdfCWIe0117JJ3TP9/7kCxNdfIbS53x/Ux+hv2X57oyapfsng=="
   },
   {
    "id": "2026-11-08",
-   "riddleAt": "2026-11-08T15:00:00.000Z",
-   "revealAt": "2026-11-08T15:30:00.000Z",
+   "riddleAt": "2026-11-08T14:00:00.000Z",
+   "revealAt": "2026-11-08T14:30:00.000Z",
    "finale": true,
    "giftCount": 2,
    "greeting": "ЗАМЕНИ: главное поздравление с днём рождения.",
@@ -260,7 +260,7 @@
    "media": [
     {
      "file": "media/2026-11-08-1.bin",
-     "iv": "dUw/+yHxcO5b247d",
+     "iv": "FQWGA9trLNP0Pjf0",
      "type": "image/jpeg",
      "w": 1200,
      "h": 1600,
@@ -270,7 +270,7 @@
     },
     {
      "file": "media/2026-11-08-2.bin",
-     "iv": "/w20A0HzqeNjItDs",
+     "iv": "s9M3UhBNzYBbc/VR",
      "type": "video/mp4",
      "w": 720,
      "h": 1280,
@@ -281,13 +281,13 @@
    ],
    "wraps": [
     {
-     "salt": "aPi/mueLSfB90YzEfcrccw==",
-     "iv": "//gcWU56P5F4apwQ",
-     "ct": "wKzBK/gp9uJF9y9kpKjlRQj6qjR3IjB+h1+mpx7Z+XoYo2MJ/NVeeoZIpUhWjOtM"
+     "salt": "Ad1dL1KHS0F2jO+FVui7Vw==",
+     "iv": "Aoa3g58Ax507lYGi",
+     "ct": "s8MhkidhyTmDdP3lRi5zUa6UA5lmWAHXBaRLhujwlqheAkDHmVmwlrLskKKKu4FO"
     }
    ],
-   "iv": "ZeJYv4C7uBoIENFA",
-   "ct": "szXUY8gkxCLGWPkbhE2VaXieSAgIa9SN+5DTrMHDshIamQLL7YqOskoHoCGawZ/5fmH9TXl6Ig7LDdIftGwHnoXtwQO90LncEvcbQz2RjY4KAYtbu1yT8I9WOhVjBrRL0wrNTt6fqSe10adKvTw52OQjG3naHpaiiP/ErHQyxgWTeyuPw0wBX93wwAB4pFUCn9meSgwCXaTJIM68sMyLEY/nZnH07if2xxdsGtHSZDw+NtcW29LtAk3IhQAZX1OBalK+rJ50ZKNwvpw8CP2wtPQV0MUa0F/v1emukeWTOI9QXjR6Uszik2iq/aaFeYnc1gjgODAQjDVy8V6C+QskABU7+0MfsKewW/AtFGpGo5UIbgLowWpu3+gJXdj5ZvjSrTriTBUmtg3xLwIj/yQsufrk3fb7P2n2BDzAfebUGmRcFQ5TsxtdTcp6G1eeW7VIhPgrwZg="
+   "iv": "gA0LAFArFWS+uaAU",
+   "ct": "vBxfiD75+PdBrEjuIAQ4cN4DLX2e87HGY1IyWCcXyFikPrwNpn+glXtnTX6fkpOzWqL2L872W5DbetXS9S9tJTi1Nn6SoVTMFM8wSnk0cH1Cm0WZ8IZha8oKgTS5vvI5EjpNj+p2jf81CkOL02ampuuV2Fu6gJeXOr4v+CHyqL9Cr5Z6OV7IWBgW+J3M8WLcWAqCFDpMyhsj/4U36wPF5AqTirB/I1xH9JWA3L32S+nRlawxyxY26/Gzz7TPYxp85gIjgPyHKnsIGUVKXFy+dIAG2HPHXOEHsEgwfCmY/4JZONN25S2qk1qMWdBWPY9nCzetLB4sAmYtzOuT8hVBbVUD7GCI13fBCHvaiSjk1yQFAj/xdNkVyYNwqaBhzLyM0vNGJRn9k3Ur6GEP+UAbDpRHQEDeSEEIZkqwHgew1KE8dWuHbhmC+HHnLOPBchavBhaPx6k="
   }
  ]
 }
