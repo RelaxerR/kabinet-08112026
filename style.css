@@ -138,3 +138,16 @@ dialog p{margin:8px 0 16px;font-size:16px;line-height:1.5}
 /* фото подарка из карточки товара */
 .gift .gimg{margin:10px 0 4px;background:#fff;padding:6px;box-shadow:0 3px 6px rgba(40,20,5,.35);transform:rotate(-.8deg)}
 .gift .gimg img{display:block;width:100%;max-height:300px;object-fit:contain;background:#fff}
+
+/* заглушка с этапами */
+.tz{margin-top:24px}
+.tz .cd{font-size:34px;margin:6px 0 14px;letter-spacing:.02em}
+.tz-p{margin:0;font-size:16px;line-height:1.55;text-align:left}
+.tz-list{margin:22px 0 0;padding:14px 16px;list-style:none;font:500 13px/1.4 'IBM Plex Mono',monospace}
+.tz-list li{display:flex;justify-content:space-between;gap:10px;padding:7px 0;border-bottom:1px dashed rgba(74,60,46,.4)}
+.tz-list li:last-child{border-bottom:0}
+.tz-list li i{font-style:normal;color:#7A6A58;white-space:nowrap}
+.tz-list li.done span{text-decoration:line-through;opacity:.55}
+.tz-list li.done i{opacity:.55}
+.tz-list li.now{color:#B8352B;font-weight:600}
+.tz-list li.now i{color:#B8352B}

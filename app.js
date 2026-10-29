@@ -91,6 +91,28 @@
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
   var DELAY = function (d) { return Date.parse(d.revealAt) - Date.parse(d.riddleAt); };
 
+  /* ---- заглушка до начала дела: этапы с таймерами (тексты открытые, секретов тут нет) ---- */
+  var STAGES = [
+    { at: '2026-10-30T18:30:00+04:00', title: 'До выезда в Воткинск', short: 'Дорога в Воткинск', when: '30 окт · 18:30',
+      text: 'Дорога, родители, праздник: всё это совсем скоро. А у Канцелярии Уюта на вас свои планы: после праздничных дней для вас откроют особое дело. Загляните сюда, когда таймер дойдёт до нуля, и вы увидите следующий этап. Если в дороге пропадёт интернет, ничего страшного: страница подхватит всё, как только связь вернётся.' },
+    { at: '2026-10-31T16:00:00+04:00', title: 'До начала праздника', short: 'Праздник', when: '31 окт · 16:00',
+      text: 'Скоро начнётся праздник, и Канцелярия обещает не мешать. Но в 16:00 загляните сюда на секунду: следующий этап не сдвинется без вас. А мы пока доводим до ума то, ради чего вся эта страница. Подробности будут, но позже.' },
+    { at: '2026-11-01T18:30:00+04:00', title: 'До тихого вечера дома', short: 'Вечер дома', when: '1 ноя · 18:30',
+      text: 'Праздник позади, вы дома: диван, плед, возможно, «Дюна». Это последний вечер перед тем, что для вас готовится. Откройте страницу в 18:30, дальше останется всего одна ночь.' },
+    { at: '2026-11-02T00:00:00+04:00', title: 'До начала дела', short: 'Последнее ожидание', when: '2 ноя · 00:00',
+      text: 'Последнее ожидание. В полночь Канцелярия откроет доску дела, а первое письмо придёт уже в тот же день, в 18:00 по Ижевску. Дальше каждый вечер вас будет ждать загадка, а за верный ответ кое-что для вашего собственного кабинета. Заходите в полночь, если не спите. Или утром: всё будет на месте.' }
+  ];
+  function teaserIdx() { var t = now(); for (var i = 0; i < STAGES.length; i++) if (t < Date.parse(STAGES[i].at)) return i; return -1; }
+  function teaser(i) {
+    var S = STAGES[i], at = Date.parse(S.at);
+    app.className = '';
+    app.innerHTML = '<div class="paper locked tz"><i class="pin"></i><div class="eyebrow">Канцелярия Уюта · входящее · ' + (i + 1) + ' из ' + STAGES.length + '</div><h1>' + S.title + '</h1>' +
+      '<div class="cd" data-cd="' + at + '">' + fmt(at - now()) + '</div><p class="tz-p">' + S.text + '</p></div>' +
+      '<ol class="paper tz-list" style="--r:.8deg">' + STAGES.map(function (x, j) {
+        return '<li class="' + (j < i ? 'done' : j === i ? 'now' : '') + '"><span>' + x.short + '</span><i>' + x.when + '</i></li>';
+      }).join('') + '</ol>';
+  }
+
   /* ---- утилиты ---- */
   function p2(n) { return ('0' + n).slice(-2); }
   function fmt(ms) {
@@ -263,9 +285,11 @@
   }
 
   /* ---- маршрутизация и таймер ---- */
-  function signature() { return D.map(function (d) { return state(d) + (ready(d) ? 'r' : ''); }).join() + '|' + Object.keys(mediaUrls).length + '|' + Object.keys(giftUrls).length; }
+  function signature() { var ti = teaserIdx(); if (ti >= 0) return 'T' + ti; return D.map(function (d) { return state(d) + (ready(d) ? 'r' : ''); }).join() + '|' + Object.keys(mediaUrls).length + '|' + Object.keys(giftUrls).length; }
   function route() {
     document.querySelectorAll('.heart').forEach(function (h) { h.remove(); });
+    var ti = teaserIdx();
+    if (ti >= 0) { teaser(ti); sig = signature(); return; }
     var m = /^#\/day\/(\d+)/.exec(location.hash), d = m && D.filter(function (x) { return x.n === +m[1]; })[0];
     if (!d) { home(); }
     else if (state(d) === 'closed') { locked(d); }
@@ -290,11 +314,13 @@
 
   /* ---- запуск ---- */
   function fail(t) { app.innerHTML = '<div class="paper locked"><h1>Канцелярия закрыта</h1><p style="margin:0">' + t + '</p></div>'; }
-  if (!(window.crypto && crypto.subtle)) { fail('Нужен защищённый адрес (https).'); return; }
   if (DEBUG_ENABLED && q.has('reset')) { try { localStorage.removeItem('adv_answers'); localStorage.removeItem('adv_hints'); } catch (e) {} }
   hints = lsGet('adv_hints');
-  Promise.all([syncTime(), fetch('data.json', { cache: 'no-store' }).then(function (r) { return r.json(); })]).then(function (res) {
-    DATA = res[1]; D = DATA.days;
+  if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function () {});
+  var tp = syncTime();
+  tp.then(function () { if (teaserIdx() >= 0) route(); });
+  tp.then(function () { return fetch('data.json', { cache: 'no-store' }).then(function (r) { return r.json(); }); }).then(function (data) {
+    DATA = data; D = DATA.days;
     var saved = lsGet('adv_answers');
     return Promise.all(D.map(function (d) {
       return saved[d.id] ? tryDecrypt(d, saved[d.id]).then(function (c) { if (c) opened[d.id] = c; }) : null;
@@ -302,5 +328,5 @@
   }).then(function () {
     route();
     D.forEach(function (d) { if (opened[d.id]) loadMedia(d).then(function () { if (!(document.activeElement && document.activeElement.tagName === 'INPUT') && !dlg.open) route(); }); });
-  }).catch(function () { fail('Не удалось загрузить данные. Обновите страницу.'); });
+  }).catch(function () { if (teaserIdx() < 0) fail('Не удалось загрузить данные. Обновите страницу.'); });
 })();
