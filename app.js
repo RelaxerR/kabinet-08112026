@@ -109,7 +109,8 @@
     app.innerHTML = '<div class="paper locked tz"><i class="pin"></i><div class="eyebrow">Канцелярия Уюта · входящее · ' + (i + 1) + ' из ' + STAGES.length + '</div><h1>' + S.title + '</h1>' +
       '<div class="cd" data-cd="' + at + '">' + fmt(at - now()) + '</div><p class="tz-p">' + S.text + '</p></div>' +
       '<ol class="paper tz-list" style="--r:.8deg">' + STAGES.map(function (x, j) {
-        return '<li class="' + (j < i ? 'done' : j === i ? 'now' : '') + '"><span>' + x.short + '</span><i>' + x.when + '</i></li>';
+        if (j > i) return '<li class="hid"><span>???</span><i>?? ??? · ??:??</i></li>';
+        return '<li class="' + (j < i ? 'done' : 'now') + '"><span>' + x.short + '</span><i>' + x.when + '</i></li>';
       }).join('') + '</ol>';
   }
 
