@@ -9,6 +9,7 @@
   var enc = new TextEncoder(), dec = new TextDecoder();
   var DATA, D = [];
   var opened = {};     // id дня -> { gifts, ps, finaleText, key }
+  var answeredAt = {};
   var mediaUrls = {};  // id дня -> [blobUrl|null]
   var mediaBusy = {};
   var giftUrls = {};   // id дня -> [blobUrl|null] (фото подарков из карточек товара)
@@ -85,8 +86,11 @@
     if (!opened[d.id]) return 'riddle';
     return 'open';
   }
-  // «Где искать» открывается в 18:30: к этому времени подарок уже лежит на месте
-  function ready(d) { return now() >= Date.parse(d.revealAt); }
+  function revealAt(d) {
+    var timestamp = Number(answeredAt[d.id]);
+    return timestamp > 0 ? timestamp + DELAY(d) : null;
+  }
+  function ready(d) { var end = revealAt(d); return end === null || now() >= end; }
   function eNo(d) { var k = 1; for (var i = 0; i < D.length && D[i] !== d; i++) k += D[i].giftCount; return k; }
   function esc(s) { return String(s == null ? '' : s).replace(/[&<>"']/g, function (c) { return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]; }); }
   var DELAY = function (d) { return Date.parse(d.revealAt) - Date.parse(d.riddleAt); };
@@ -146,7 +150,7 @@
         (first ? '<span data-cd="' + openAt(d) + '">' + fmt(openAt(d) - now()) + '</span>' : d.n + '.11 в 18:00') + '</div><span class="sticker">18:00</span></a>';
     }
     var mode = s === 'riddle' ? 'lock' : 'open', inner;
-    if (s === 'open') inner = '<div class="st">Подарок выдан</div><div class="sub">' + (ready(d) ? 'Вещдок №' + eNo(d) + (d.giftCount > 1 ? '–' + (eNo(d) + d.giftCount - 1) : '') : 'адрес откроется в 18:30') + '</div>';
+    if (s === 'open') inner = '<div class="st">Подарок выдан</div><div class="sub">' + (ready(d) ? 'Вещдок №' + eNo(d) + (d.giftCount > 1 ? '–' + (eNo(d) + d.giftCount - 1) : '') : 'адрес откроется через 30 секунд') + '</div>';
     else inner = '<div class="st"><span class="lamp"></span>Новая загадка</div><span class="mini">Читать письмо →</span>';
     return '<a class="note ' + side + (s === 'riddle' ? ' riddle' : '') + '" href="' + href + '" style="' + r + '"><i class="pin"></i><div class="g"><div class="pol">' + photo(d, 1, mode) + '</div><div><div class="n">' + num + '</div>' + inner + '</div></div></a>';
   }
@@ -191,9 +195,9 @@
         (rdy ? '<div class="where"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="#7A1F1A" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 21s7-6.2 7-11.5A7 7 0 0 0 5 9.5C5 14.8 12 21 12 21z"/><circle cx="12" cy="9.5" r="2.5"/></svg><div><div class="eyebrow" style="font-weight:600;color:#2B2118">Где искать</div><div style="font-size:16px;line-height:1.45;margin-top:4px">' + esc(g.where) + '</div></div></div>' : '');
     }).join('');
     if (!rdy) {
-      var end = Date.parse(d.revealAt);
+      var end = revealAt(d);
       out += '<div class="paper wait"><i class="pin"></i><div class="eyebrow">Выдача вещдока</div><div style="font:600 20px/1.25 Literata,serif;margin-top:4px">Канцелярия готовит выдачу…</div>' +
-        '<div class="sub">Адрес откроется в 18:30 по Ижевску, через <b data-cd="' + end + '">' + fmt(end - now()) + '</b></div><div class="bar"><i data-prog="' + openAt(d) + '" data-dur="' + DELAY(d) + '"></i></div></div>';
+        '<div class="sub">Адрес откроется через <b data-cd="' + end + '">' + fmt(end - now()) + '</b></div><div class="bar"><i data-prog="' + (end - DELAY(d)) + '" data-dur="' + DELAY(d) + '"></i></div></div>';
     }
     return out;
   }
@@ -232,7 +236,7 @@
         if (!(window.crypto && crypto.subtle)) { msg.textContent = 'Нужен защищённый адрес (https).'; msg.classList.add('on'); return; }
         tryDecrypt(d, v).then(function (c) {
           if (c) {
-            opened[d.id] = c; lsSet('adv_answers', d.id, v); justAnswered = d.id;
+            opened[d.id] = c; answeredAt[d.id] = now(); lsSet('adv_answers', d.id, v); lsSet('adv_answered_at', d.id, answeredAt[d.id]); justAnswered = d.id;
             if (navigator.vibrate) navigator.vibrate(20);
             loadMedia(d).then(route);
           } else {
@@ -315,8 +319,9 @@
 
   /* ---- запуск ---- */
   function fail(t) { app.innerHTML = '<div class="paper locked"><h1>Канцелярия закрыта</h1><p style="margin:0">' + t + '</p></div>'; }
-  if (DEBUG_ENABLED && q.has('reset')) { try { localStorage.removeItem('adv_answers'); localStorage.removeItem('adv_hints'); } catch (e) {} }
+  if (DEBUG_ENABLED && q.has('reset')) { try { localStorage.removeItem('adv_answers'); localStorage.removeItem('adv_answered_at'); localStorage.removeItem('adv_hints'); } catch (e) {} }
   hints = lsGet('adv_hints');
+  answeredAt = lsGet('adv_answered_at');
   if ('serviceWorker' in navigator) navigator.serviceWorker.register('sw.js').catch(function () {});
   var tp = syncTime();
   tp.then(function () { if (teaserIdx() >= 0) route(); });
