@@ -186,18 +186,18 @@
     200,
     40
    ],
-   "riddleAt": "2026-11-04T14:00:00.000Z",
-   "revealAt": "2026-11-04T14:00:30.000Z",
+   "riddleAt": "2026-11-04T12:00:00.000Z",
+   "revealAt": "2026-11-04T12:00:30.000Z",
    "final": false,
    "giftCount": 1,
-   "greet": "Алёна, срочное донесение:",
-   "body": "Кабинету нужен страж, который видит всё и знает больше, чем говорит. Он носит маску, читает книжки и опаздывает на встречи, зато появляется ровно тогда, когда нужен. Канцелярия выдаёт вам такого стража и знает, что это ваш любимый герой.",
-   "riddle": "Ниндзя в маске: читаю книжку и вечно опаздываю. Кто я?",
-   "hint": "Учитель седьмой команды в «Наруто».",
+   "greet": "Дорогая Алёна!",
+   "body": "У каждого следователя должно быть место, куда больше никто не лезет. Сегодня Канцелярия выдаёт вам личную тумбу у изголовья: для ноутбука, планшета и всех ваших мелочей. И, конечно, для подарков: поверьте, они сюда ещё будут попадать.",
+   "riddle": "Я стою у кровати. У меня есть дверца и ящик, но я не шкаф. Что я?",
+   "hint": "Она стоит при кровати.",
    "media": [
     {
      "file": "media/2026-11-04-1.bin",
-     "iv": "bjtijmsAW5nOxRmt",
+     "iv": "xCpqqSOvQyfqyoa6",
      "type": "image/jpeg",
      "w": 1200,
      "h": 1600,
@@ -206,7 +206,7 @@
     },
     {
      "file": "media/2026-11-04-2.bin",
-     "iv": "axG/aYkdup5F3jyE",
+     "iv": "cYgOc3OK4fPObvYo",
      "type": "image/jpeg",
      "w": 1200,
      "h": 1600,
@@ -217,39 +217,34 @@
    "giftImgs": [
     {
      "file": "media/2026-11-04-g1.bin",
-     "iv": "7ud62Elhn7D7mlSh",
+     "iv": "i1I9VcKKwNN8BrcI",
      "type": "image/webp"
     }
    ],
    "wraps": [
     {
-     "salt": "ML51Dril40DOPW4n8gY8Gg==",
-     "iv": "LaYZ1hKHMe8b+FI/",
-     "ct": "MpHbnvZ2yODVaDxi3rCttTQR6vkx4UZ7SFreuzP5leL4/YRrbiYfrBTZ4M+5H8P7"
+     "salt": "4M0qc8k3fSMhM5nKUZwAAw==",
+     "iv": "KSWkrwOCaGjMj++B",
+     "ct": "Uk/CMqcDY8B9Mebat2LJcEWvz4nFDagU82d5wH26HDgo1Jml7M94qR+ArUU69T8D"
     },
     {
-     "salt": "sbkr+6p99aynOh9eyJ+nuA==",
-     "iv": "aYB6fzq41CcrhG4I",
-     "ct": "XHnAhjH3Qzag+ZukpGjEFKIKrz617+GFXvLD7yh1vvan4mTtoOQjIp5MzdVVSt3r"
+     "salt": "vZH9zwLpVG5ZZPwTsgDvJw==",
+     "iv": "hnhlr65viI0/bPBi",
+     "ct": "s+5EXy3FnUB49mglulj/a4FK0OrFBJ/ftCUoNbIOHHw4CZzN+6zzMzcyU8aXPTEC"
     },
     {
-     "salt": "gCtOcRnVc3FdcwEzM0DK6Q==",
-     "iv": "Lz5HEmyl/fFtmb5x",
-     "ct": "WdkZxUrgMNEAN6nLLGXrnrlygyDA6V7ulq5APGLJXblJPcNMcHI1IqePyVXLANGD"
+     "salt": "GbK/U03KYym7Rv2WIZ45Bg==",
+     "iv": "9R8Ew58mrzovmxWL",
+     "ct": "P8pgum9nEYK+kc0tArGiCYxFXHZTT1cNIgTxrbS1d5dU1G6RyLJRqjCja6bQYBxE"
     },
     {
-     "salt": "ibJEEl221v8Ne63pgXyrbA==",
-     "iv": "9vUbQcn/8gmNnxgj",
-     "ct": "dBTxeXtbscxgAsXXMtZMe92sKjN9CYxlu27ddVRgiLsbu6Q1zcjVaZVsXj1+kevP"
-    },
-    {
-     "salt": "JI7lhMmK0zLLZe2t+kwrvg==",
-     "iv": "mS2ih43al5N/wgul",
-     "ct": "2Qhvqhn5gZ1AnlUnME1QoRoLG9GrXCN/VuhnXrCwtF/TmYMz+pL355lqetakB9x2"
+     "salt": "CAfNbqnSOftb/r0I2f+ZGA==",
+     "iv": "ueiTMuoBD7jYjECG",
+     "ct": "rLnt/FU/R6gd4TsvGFnJNulitdkEmN96z7trdCLGDHqkkREfZ6bEel9QpsVtaSWR"
     }
    ],
-   "iv": "2lA88C+xaHBt2vEE",
-   "ct": "XzooYeHXCCw6wqxukL9OcULhYubeGNa+12W6On+4WX6MhkNIBMjPsP7txsS+/sr4ZZSGU0I7fRiRD4qBjPl6rzy7Cts2E9z1GRNndijA1h6IdUNcjqL9EYxnhzvWK3qXNZb2OGzVhYmoeXEH1V+m56j6cwVobXT//vkNIF+Fi8CxvLONLihv9pHSOeDSELJ6JcomQkh4xJ3i9j6f2tx3mBZ+EfT+WdOqCJ9vDow/QmQe6tV+DfOc5bEJtlLH0o7hicOdKCX18Str2e4bwR1HGJJCpIFgmFIS3XNoQF18En0zf+0PrK4rvj79HUP0P11btVhnIt3JrLO/sDn8PUUxWbDyjaTCIbMfdU7PvkT/TgdQ2Ondl0cFxOrbnJzhXFf4rFvSW0PT+lFYq2VdLfWxMgk39rvY0QVYJnWGl2zyF4r41CEtKd3NtJVrHC0Qqme/Aie+DmG59N+iKVkW9wrH0aw9+mx68ZvGnAS9hpzsWHpd0PO3pFFCi6Fa4zepli4yBoER7acIVgLDFmy8+HadNBGAhwoj/cUY2xW0KI3dGKGqNw=="
+   "iv": "sr81FpVDLF459cxL",
+   "ct": "BPrUck0jkkMGp4YpqORNWElL0zaYQzjM/dyO44oWZvDlv4spRAWKa4hdpQt5mHp8xM6fMkulSvqvDLMlFabt/d0iva6jBSHAywY3G/6++86BbfuXZoHymB+qiQAWFm3bdVuc10SNHmgGUud3GIBJbaykM3pq6i2A/3HrFATvUCH/WG6YE1k2q4qNo3iTlFBawyy/gMkb0qJpN3WmzSiAAkunQXYF6c8Dltzhq8W+eQG4+jnG2NjmxftF8fkjCrILkX7jijuFa7+y+NGXOZKkjyGweFVtY/Ir3hBv37pn0JVlEitKlRThG9kcNEmGbGkkiEJ/qwJYl2586rbZ4sXrtEPPexgtcVK8bDjjY0HKDPdN0EkrKGFeETeCbLx/+rMPl4DCSmZgchVUsZhPywm3f/z7Fm1f7z83NIuybHC3vGwj98bjEYVvM99yDb2gtgKcFA=="
   },
   {
    "id": "2026-11-05",
@@ -346,14 +341,14 @@
    "revealAt": "2026-11-06T14:00:30.000Z",
    "final": false,
    "giftCount": 1,
-   "greet": "Дорогая Алёна!",
-   "body": "У каждого следователя должно быть место, куда больше никто не лезет. Сегодня Канцелярия выдаёт вам личную тумбу у изголовья: для ноутбука, планшета и всех ваших мелочей. И, конечно, для подарков: поверьте, они сюда ещё будут попадать.",
-   "riddle": "Я стою у кровати. У меня есть дверца и ящик, но я не шкаф. Что я?",
-   "hint": "Она стоит при кровати.",
+   "greet": "Алёна, срочное донесение:",
+   "body": "Кабинету нужен страж, который видит всё и знает больше, чем говорит. Он носит маску, читает книжки и опаздывает на встречи, зато появляется ровно тогда, когда нужен. Канцелярия выдаёт вам такого стража и знает, что это ваш любимый герой.",
+   "riddle": "Ниндзя в маске: читаю книжку и вечно опаздываю. Кто я?",
+   "hint": "Учитель седьмой команды в «Наруто».",
    "media": [
     {
      "file": "media/2026-11-06-1.bin",
-     "iv": "bQ4wefzNsFeWUVHW",
+     "iv": "Yu2nFX2at/ilau+s",
      "type": "image/jpeg",
      "w": 1200,
      "h": 1600,
@@ -362,7 +357,7 @@
     },
     {
      "file": "media/2026-11-06-2.bin",
-     "iv": "WfKLPRzlRiETz4VF",
+     "iv": "mu2dUgWECC71rTAP",
      "type": "image/jpeg",
      "w": 1600,
      "h": 1200,
@@ -373,34 +368,39 @@
    "giftImgs": [
     {
      "file": "media/2026-11-06-g1.bin",
-     "iv": "i1I9VcKKwNN8BrcI",
+     "iv": "7ud62Elhn7D7mlSh",
      "type": "image/webp"
     }
    ],
    "wraps": [
     {
-     "salt": "4M0qc8k3fSMhM5nKUZwAAw==",
-     "iv": "KSWkrwOCaGjMj++B",
-     "ct": "Uk/CMqcDY8B9Mebat2LJcEWvz4nFDagU82d5wH26HDgo1Jml7M94qR+ArUU69T8D"
+     "salt": "ML51Dril40DOPW4n8gY8Gg==",
+     "iv": "LaYZ1hKHMe8b+FI/",
+     "ct": "MpHbnvZ2yODVaDxi3rCttTQR6vkx4UZ7SFreuzP5leL4/YRrbiYfrBTZ4M+5H8P7"
     },
     {
-     "salt": "vZH9zwLpVG5ZZPwTsgDvJw==",
-     "iv": "hnhlr65viI0/bPBi",
-     "ct": "s+5EXy3FnUB49mglulj/a4FK0OrFBJ/ftCUoNbIOHHw4CZzN+6zzMzcyU8aXPTEC"
+     "salt": "sbkr+6p99aynOh9eyJ+nuA==",
+     "iv": "aYB6fzq41CcrhG4I",
+     "ct": "XHnAhjH3Qzag+ZukpGjEFKIKrz617+GFXvLD7yh1vvan4mTtoOQjIp5MzdVVSt3r"
     },
     {
-     "salt": "GbK/U03KYym7Rv2WIZ45Bg==",
-     "iv": "9R8Ew58mrzovmxWL",
-     "ct": "P8pgum9nEYK+kc0tArGiCYxFXHZTT1cNIgTxrbS1d5dU1G6RyLJRqjCja6bQYBxE"
+     "salt": "gCtOcRnVc3FdcwEzM0DK6Q==",
+     "iv": "Lz5HEmyl/fFtmb5x",
+     "ct": "WdkZxUrgMNEAN6nLLGXrnrlygyDA6V7ulq5APGLJXblJPcNMcHI1IqePyVXLANGD"
     },
     {
-     "salt": "CAfNbqnSOftb/r0I2f+ZGA==",
-     "iv": "ueiTMuoBD7jYjECG",
-     "ct": "rLnt/FU/R6gd4TsvGFnJNulitdkEmN96z7trdCLGDHqkkREfZ6bEel9QpsVtaSWR"
+     "salt": "ibJEEl221v8Ne63pgXyrbA==",
+     "iv": "9vUbQcn/8gmNnxgj",
+     "ct": "dBTxeXtbscxgAsXXMtZMe92sKjN9CYxlu27ddVRgiLsbu6Q1zcjVaZVsXj1+kevP"
+    },
+    {
+     "salt": "JI7lhMmK0zLLZe2t+kwrvg==",
+     "iv": "mS2ih43al5N/wgul",
+     "ct": "2Qhvqhn5gZ1AnlUnME1QoRoLG9GrXCN/VuhnXrCwtF/TmYMz+pL355lqetakB9x2"
     }
    ],
-   "iv": "sr81FpVDLF459cxL",
-   "ct": "BPrUck0jkkMGp4YpqORNWElL0zaYQzjM/dyO44oWZvDlv4spRAWKa4hdpQt5mHp8xM6fMkulSvqvDLMlFabt/d0iva6jBSHAywY3G/6++86BbfuXZoHymB+qiQAWFm3bdVuc10SNHmgGUud3GIBJbaykM3pq6i2A/3HrFATvUCH/WG6YE1k2q4qNo3iTlFBawyy/gMkb0qJpN3WmzSiAAkunQXYF6c8Dltzhq8W+eQG4+jnG2NjmxftF8fkjCrILkX7jijuFa7+y+NGXOZKkjyGweFVtY/Ir3hBv37pn0JVlEitKlRThG9kcNEmGbGkkiEJ/qwJYl2586rbZ4sXrtEPPexgtcVK8bDjjY0HKDPdN0EkrKGFeETeCbLx/+rMPl4DCSmZgchVUsZhPywm3f/z7Fm1f7z83NIuybHC3vGwj98bjEYVvM99yDb2gtgKcFA=="
+   "iv": "2lA88C+xaHBt2vEE",
+   "ct": "XzooYeHXCCw6wqxukL9OcULhYubeGNa+12W6On+4WX6MhkNIBMjPsP7txsS+/sr4ZZSGU0I7fRiRD4qBjPl6rzy7Cts2E9z1GRNndijA1h6IdUNcjqL9EYxnhzvWK3qXNZb2OGzVhYmoeXEH1V+m56j6cwVobXT//vkNIF+Fi8CxvLONLihv9pHSOeDSELJ6JcomQkh4xJ3i9j6f2tx3mBZ+EfT+WdOqCJ9vDow/QmQe6tV+DfOc5bEJtlLH0o7hicOdKCX18Str2e4bwR1HGJJCpIFgmFIS3XNoQF18En0zf+0PrK4rvj79HUP0P11btVhnIt3JrLO/sDn8PUUxWbDyjaTCIbMfdU7PvkT/TgdQ2Ondl0cFxOrbnJzhXFf4rFvSW0PT+lFYq2VdLfWxMgk39rvY0QVYJnWGl2zyF4r41CEtKd3NtJVrHC0Qqme/Aie+DmG59N+iKVkW9wrH0aw9+mx68ZvGnAS9hpzsWHpd0PO3pFFCi6Fa4zepli4yBoER7acIVgLDFmy8+HadNBGAhwoj/cUY2xW0KI3dGKGqNw=="
   },
   {
    "id": "2026-11-07",

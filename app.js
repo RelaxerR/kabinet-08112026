@@ -120,6 +120,8 @@
 
   /* ---- утилиты ---- */
   function p2(n) { return ('0' + n).slice(-2); }
+  /* время открытия дня по Ижевску (UTC+4), берётся из riddleAt */
+  function timeRu(d) { var t = new Date(Date.parse(d.riddleAt) + 4 * 3600000); return p2(t.getUTCHours()) + ':' + p2(t.getUTCMinutes()); }
   function fmt(ms) {
     if (ms < 0) ms = 0;
     var s = Math.floor(ms / 1000), d = Math.floor(s / 86400); s -= d * 86400;
@@ -147,7 +149,7 @@
     if (s === 'closed') {
       var first = D.filter(function (x) { return state(x) === 'closed'; })[0] === d;
       return '<a class="note env ' + side + '" href="' + href + '" style="' + r + '" aria-label="День ' + d.n + ', запечатано"><i class="pin"></i><div class="lab">' + num + ' · ' +
-        (first ? '<span data-cd="' + openAt(d) + '">' + fmt(openAt(d) - now()) + '</span>' : d.n + '.11 в 18:00') + '</div><span class="sticker">18:00</span></a>';
+        (first ? '<span data-cd="' + openAt(d) + '">' + fmt(openAt(d) - now()) + '</span>' : d.n + '.11 в ' + timeRu(d)) + '</div><span class="sticker">' + timeRu(d) + '</span></a>';
     }
     var mode = s === 'riddle' ? 'lock' : 'open', inner;
     if (s === 'open') inner = '<div class="st">Подарок выдан</div><div class="sub">' + (ready(d) ? 'Вещдок №' + eNo(d) + (d.giftCount > 1 ? '–' + (eNo(d) + d.giftCount - 1) : '') : 'адрес откроется через 30 секунд') + '</div>';
@@ -184,7 +186,7 @@
   function locked(d) {
     app.className = '';
     app.innerHTML = backBar() + '<div class="paper locked"><i class="pin"></i><div class="eyebrow">Дело №08.11 · ' + dateRu(d) + '</div><h1>Конверт запечатан</h1>' +
-      '<p style="margin:0 0 12px;font-size:16px;line-height:1.5">Канцелярия работает по графику. Поступит в 18:00 по Ижевску.</p><div class="cd" data-cd="' + openAt(d) + '">' + fmt(openAt(d) - now()) + '</div></div>';
+      '<p style="margin:0 0 12px;font-size:16px;line-height:1.5">Канцелярия работает по графику. Поступит в ' + timeRu(d) + ' по Ижевску.</p><div class="cd" data-cd="' + openAt(d) + '">' + fmt(openAt(d) - now()) + '</div></div>';
   }
   function giftsHtml(d) {
     var c = opened[d.id], n = eNo(d), rdy = ready(d), gu = giftUrls[d.id] || [];
@@ -210,7 +212,7 @@
       '<div class="paper hero"><i class="pin"></i>' + photo(d, 1, mode) + '<div class="cap">УЛИКА №' + eNo(d) + '</div>' +
       '<div class="paper pol2"><i class="pin" style="left:54px"></i>' + photo(d, 2, mode) + '<div class="d">' + esc(m2 ? m2.date : '') + '</div></div></div>' +
       (s !== 'riddle' ? '<div class="stamp">ВЕРНО</div>' : '') +
-      '<div class="paper letter ruled ' + tone + '"><div class="mono eyebrow">ИСХ. №' + p2(d.n) + '/11 · ' + dateRu(d) + ', 18:00</div><div class="gr">' + d.greet + '</div><p>' + d.body + '</p>' +
+      '<div class="paper letter ruled ' + tone + '"><div class="mono eyebrow">ИСХ. №' + p2(d.n) + '/11 · ' + dateRu(d) + ', ' + timeRu(d) + '</div><div class="gr">' + d.greet + '</div><p>' + d.body + '</p>' +
       '<div class="rid"><b>ЗАГАДКА · </b>' + d.riddle + '</div></div>';
     if (s === 'riddle') {
       h += '<form class="form" id="f" autocomplete="off"><label for="ans">Ваш ответ</label><input id="ans" type="text" enterkeyhint="send" autocapitalize="off" autocorrect="off" spellcheck="false"><p class="msg" id="msg" role="status"></p>' +
@@ -222,7 +224,7 @@
       h += giftsHtml(d) + (ps ? '<div class="paper letter tone-2" style="margin-top:16px"><div class="ps" style="font:500 26px/28px Caveat,cursive">' + esc(ps) + '</div></div>' : '');
     }
     var nx = D[idx + 1];
-    if (nx) h += '<div class="next">СЛЕДУЮЩИЙ КОНВЕРТ · ' + dateRu(nx).toUpperCase() + ', 18:00' + (state(nx) === 'closed' ? '<br>через <b data-cd="' + openAt(nx) + '">' + fmt(openAt(nx) - now()) + '</b>' : '<br><a href="#/day/' + nx.n + '" style="text-decoration:underline">Уже можно открыть</a>') + '</div>';
+    if (nx) h += '<div class="next">СЛЕДУЮЩИЙ КОНВЕРТ · ' + dateRu(nx).toUpperCase() + ', ' + timeRu(nx) + (state(nx) === 'closed' ? '<br>через <b data-cd="' + openAt(nx) + '">' + fmt(openAt(nx) - now()) + '</b>' : '<br><a href="#/day/' + nx.n + '" style="text-decoration:underline">Уже можно открыть</a>') + '</div>';
     app.innerHTML = h;
 
     var f = document.getElementById('f');

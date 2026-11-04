@@ -69,7 +69,9 @@ const days = src.days.map((d) => {
     writeFileSync(P(rel), ct); mediaCount++;
     return { file: rel, iv: iv.toString("base64"), type: ext === "jpg" ? "image/jpeg" : `image/${ext}` };
   });
-  const riddleAt = new Date(`${d.date}T${pad(rh)}:${pad(rm)}:00${src.timezoneOffset}`);
+  // у дня можно задать своё время открытия: "riddleTime": "16:00" (иначе общее src.riddleTime)
+  const [dh, dm] = d.riddleTime ? d.riddleTime.split(":").map(Number) : [rh, rm];
+  const riddleAt = new Date(`${d.date}T${pad(dh)}:${pad(dm)}:00${src.timezoneOffset}`);
   return {
     id: d.date, n: +dd, wd: WD[new Date(`${d.date}T12:00:00Z`).getUTCDay()], hue: HUE[dd] || [20, 40],
     riddleAt: riddleAt.toISOString(),
